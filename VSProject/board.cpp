@@ -22,6 +22,20 @@ Board::Board() {
 	}
 }
 
+Board::~Board() {
+	for (int n = 0; n < dimensions; n++) {
+
+		// reset all pointers to nullptr
+		for (int i = 0; i < dimensions; i++) {
+			delete board[n][i];
+		}
+
+		delete board[n];
+	}
+
+	delete[] board;
+}
+
 void Board::print() {
 	// print the top border of the board
 	cout << "-";

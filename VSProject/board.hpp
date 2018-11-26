@@ -24,6 +24,7 @@ class Board {
 	 void print();
 	 void set(int, int, int*);
 	 void placeItems();
+	 ~Board();
  private:
 	 int*** board;
 	 int dimensions = 10;
