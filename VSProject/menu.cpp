@@ -160,3 +160,48 @@ void mainMenuReturn(bool& status) {
       }
    }
 }
+
+// menu for the player to move his/her player within the board
+void movePlayer() {
+	// menu choices
+	cout << "Where would you like to move?" << endl;
+	cout << "	1. Up" << endl;
+	cout << "	2. Right" << endl;
+	cout << "	3. Down" << endl;
+	cout << "	4. Left" << endl;
+
+	// user input / menu selection
+	cout << endl << "Selection: ";
+	int selection = 0;
+	cin >> selection;
+	intValidation(selection);
+
+	// ensure a valid menu option is chosen
+	while (selection != 1 && selection != 2 && selection != 3 && selection != 4) {
+		cout << endl << "Whoops! That's not a valid menu choice... Please try again..." << endl;
+		cout << endl << "Selection: ";
+		cin >> selection;
+		intValidation(selection);
+	}
+
+	// move up
+	if (selection == 1) {
+	}
+
+	// move right
+	else if (selection == 2) {
+	}
+
+	// move down
+	else if (selection == 3) {
+	}
+
+	// move left
+	else if (selection == 4) {
+	}
+
+	// catch an error with debugging
+	else {
+		cout << endl << "[ERROR] void movePlayer()" << endl << endl;
+	}
+}

@@ -21,8 +21,7 @@ using std::string;
 // function prototype for the program's menu
 void introMenu(bool&);
 void GameMenu(int&);
-//void OLD_GameMenu(char&);
 void mainMenuReturn(bool&);
 void instructions(bool&);
-
+void movePlayer();
 #endif

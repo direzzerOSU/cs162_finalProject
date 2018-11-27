@@ -22,11 +22,11 @@ class Board {
  public:
 	 Board();
 	 void print();
-	 void set(int, int, int*);
+	 void set(int, int, Character*);
 	 void placeItems();
 	 ~Board();
  private:
-	 int*** board;
+	 Character*** board;
 	 int dimensions = 10;
 }; 
 #endif
