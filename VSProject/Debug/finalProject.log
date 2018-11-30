@@ -1,11 +1,8 @@
-﻿  board.cpp
-  character.cpp
-c:\users\direz\onedrive\documents\github\cs162_finalproject\vsproject\character.cpp(53): warning C4018: '<': signed/unsigned mismatch
-  CircularLinkedList.cpp
-  main.cpp
-c:\users\direz\onedrive\documents\github\cs162_finalproject\vsproject\main.cpp(18): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-  menu.cpp
-  Generating Code...
+﻿  character.cpp
+c:\users\direz\onedrive\documents\github\cs162_finalproject\vsproject\character.cpp(58): warning C4018: '<': signed/unsigned mismatch
+  .NETFramework,Version=v4.0.AssemblyAttributes.cpp
   board.obj : /DEBUG:FASTLINK is not supported when managed code is present; restarting link with /DEBUG:FULL
   board.obj : MSIL module encountered; incremental linking is disabled for MSIL; performing full link
-  finalProject.vcxproj -> C:\Users\direz\OneDrive\Documents\GitHub\cs162_finalProject\VSProject\Debug\finalProject.exe
+character.obj : error LNK2001: unresolved external symbol "public: virtual void __thiscall Trainer::printStats(void)" (?printStats@Trainer@@UAEXXZ)
+main.obj : error LNK2001: unresolved external symbol "public: virtual void __thiscall Trainer::printStats(void)" (?printStats@Trainer@@UAEXXZ)
+C:\Users\direz\OneDrive\Documents\GitHub\cs162_finalProject\VSProject\Debug\finalProject.exe : fatal error LNK1120: 1 unresolved externals

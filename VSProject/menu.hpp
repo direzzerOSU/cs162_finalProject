@@ -24,4 +24,5 @@ void GameMenu(int&);
 void mainMenuReturn(bool&);
 void instructions(bool&);
 void movePlayer();
+void yesOrNo(int);
 #endif

@@ -22,6 +22,7 @@ Board::Board() {
 	}
 }
 
+// game board destructor
 Board::~Board() {
 	for (int n = 0; n < dimensions; n++) {
 
@@ -30,17 +31,18 @@ Board::~Board() {
 			delete board[n][i];
 		}
 
-		delete board[n];
+		delete[] board[n];
 	}
 
 	delete[] board;
 }
 
+// prints the current game board
 void Board::print() {
 	// print the top border of the board
 	cout << "  -";
 	for (int x = 0; x < dimensions; x++) {
-		cout << "--";
+		cout << "---";
 	}
 	cout << "----" << endl;
 	// print the board with outside border
@@ -62,7 +64,7 @@ void Board::print() {
 	// print the bottom border of the board
 	cout << "  -";
 	for (int x = 0; x < dimensions; x++) {
-		cout << "--";
+		cout << "---";
 	}
 	cout << "----" << endl;
 }
@@ -71,6 +73,21 @@ void Board::print() {
 // will be "placed" on the board at that position
 void Board::set(int row, int column, Character* value) {
 	board[row][column] = value;
+}
+
+// places the trainer on the board
+void Board::placeTrainer(Character* trainer) {
+	int row = (rand() % dimensions) + 1;
+	int col = (rand() % dimensions) + 1;
+
+	// make sure that another object isn't occupying the map's spot
+	while (board[row][col] != nullptr) {
+		row = (rand() % dimensions) + 1;
+		col = (rand() % dimensions) + 1;
+	}
+
+	// place the trainer (player) on the map
+	set(row, col, trainer);
 }
 
 // place random characters (monsters) on the board

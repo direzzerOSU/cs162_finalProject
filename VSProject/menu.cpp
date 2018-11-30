@@ -8,7 +8,6 @@
 
 #include "menu.hpp"
 #include "inputValidation.hpp"
-#include "CircularLinkedList.hpp"
 
 // game introduction menu
 void introMenu(bool& status) {
@@ -41,6 +40,16 @@ void introMenu(bool& status) {
 	   // end the game
 	   status = false;
    }
+}
+
+// valid yes/no option input validation
+void yesOrNo(int x) {
+	// ensure a valid choice is entered (1. Yes) or (2. No)
+	while (x != 1 && x != 2) {
+		cout << "Oops! You didn't enter a valid choice for yes or no... Please try again." << endl;
+		cin >> x;
+		intValidation(x);
+	}
 }
 
 // gameplay instructions before beginning gameplay

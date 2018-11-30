@@ -21,10 +21,11 @@ using std::string;
 class Board {
  public:
 	 Board();
+	 ~Board();
 	 void print();
 	 void set(int, int, Character*);
+	 void placeTrainer(Character*);
 	 void placeItems();
-	 ~Board();
  private:
 	 Character*** board;
 	 int dimensions = 10;

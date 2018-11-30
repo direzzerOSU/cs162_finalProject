@@ -9,6 +9,9 @@
 #ifndef CHARACTER_H
 #define CHARACTER_H
 
+//#include "CircularLinkedList.hpp"
+
+#include<queue>
 #include<iostream>
 using std::cout;
 using std::endl;
@@ -22,6 +25,7 @@ using std::vector;
 class Character {
 public:
 	Character() {};
+	~Character() {};
 	virtual int attacking() = 0;
 	virtual void defending(int) = 0;
 	int getHealth();
@@ -29,9 +33,8 @@ public:
 	int roll(int, int);
 	int getSpeed();
 	virtual void printStats() = 0;
-	virtual ~Character() {};
-protected:
-	std::string charType = 0;
+ protected:
+	std::string charType = "";
 	int attack = 0;
 	int defense = 0;
 	int armor = 0;
@@ -48,9 +51,14 @@ class Trainer : public Character {
 		 charType = "Trainer";
 		 selectLineup();
 	 }
+	 ~Trainer();
 	 void selectLineup();
+	 int attacking();
+	 void defending(int);
+	 void printStats();
+	 //int getLineupQty();
  private: 
-	 std::vector<Character*> lineup;	// list of pokemon that the trainer has
+	 std::queue<Character*> lineup;	// list of pokemon that the trainer has
 	 int numPokemon = 3;
 };
 
@@ -67,6 +75,7 @@ class Sparty : public Character {
 		 speed = 3;
 		 weapons = 1;
 	 }
+	 ~Sparty() {};
 	 int attacking();
 	 void defending(int);
 	 void printStats();
@@ -86,6 +95,7 @@ public:
 		speed = 5;
 		weapons = 1;
 	}
+	~Bieber() {};
 	int attacking();
 	void defending(int);
 	void printStats();
@@ -103,6 +113,7 @@ public:
 		speed = 7;
 		weapons = 1;
 	}
+	~Wonky() {};
 	int attacking();
 	void defending(int);
 	void printStats();
@@ -120,6 +131,7 @@ public:
 		speed = 10;
 		weapons = 1;
 	}
+	~HocusPocus() {};
 	int attacking();
 	void defending(int);
 	void printStats();

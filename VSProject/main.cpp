@@ -10,6 +10,7 @@
 #include "inputValidation.hpp"
 #include "menu.hpp"
 #include "character.hpp"
+//#include "vld.h"		// visual studio debugging tool (memory leak check)
 
 #include<cstdlib>
 #include<ctime>
@@ -24,13 +25,25 @@ int main() {
 	while (status) {
 		cout << "Game board:" << endl << endl;
 
+		// initialize the board & trainer (player)
 		Board* board = new Board();
+		Trainer* player = new Trainer();
 
+		// place enemy pokemon on the board
 		board->placeItems();
+
+		// place the trainer on the board
+		board->placeTrainer(player);
+
+		// print the current board
 		board->print();
+		cout << endl;
+
+		// ask if the user wants to quit the current game & return to the main menu
+		mainMenuReturn(status);
 
 		delete board;
-		mainMenuReturn(status);
+		delete player;
 	}
 
 	return 0;

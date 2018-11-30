@@ -21,9 +21,6 @@
     <ClCompile Include="character.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CircularLinkedList.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="inputValidation.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -41,14 +38,16 @@
     <ClInclude Include="character.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CircularLinkedList.hpp">
+    <ClInclude Include="menu.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="inputValidation.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="menu.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="makefile">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

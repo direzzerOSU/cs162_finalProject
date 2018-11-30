@@ -44,6 +44,14 @@ std::string Character::getType() {
 //  Trainer (Character) member functions  #
 //#########################################
 
+// default destructor of the Trainer inherited class
+Trainer::~Trainer() {
+	while (!lineup.empty()) {
+		delete lineup.front();
+		lineup.pop();
+	}
+}
+
 // menu for the user to select all of his/her pokemon (until the lineup is full)
 void Trainer::selectLineup() {
 	cout << "Please select your pokemon lineup..." << endl;
@@ -72,19 +80,25 @@ void Trainer::selectLineup() {
 		// add sparty to the player's lineup
 		if(choice == 1) {
 			Character* sparty = new Sparty();
-			lineup.insert(lineup.begin(), sparty);
+			lineup.push(sparty);
 		}
 
 		// add bieber to the player's lineup
 		else if (choice == 2) {
+			Character* bieber = new Bieber();
+			lineup.push(bieber);
 		}
 
 		// add wonky to the player's lineup
 		else if (choice == 3) {
+			Character* wonky = new Wonky();
+			lineup.push(wonky);
 		}
 
 		// add hocus pocus to the player's lineup
 		else if (choice == 4) {
+			Character* hocuspocus = new HocusPocus();
+			lineup.push(hocuspocus);
 		}
 
 		// notify the user of a bug within the program
@@ -93,6 +107,33 @@ void Trainer::selectLineup() {
 		}
 	}
 }
+
+// attack function (should do nothing)
+int Trainer::attacking() {
+	int x = 0;
+	return x;
+}
+
+// defending function (should do nothing)
+void Trainer::defending(int attackValue) {
+}
+
+// print stats
+void Trainer::printStats() {
+	cout << "Remaining Pokemon: " << lineup.size() << endl;
+
+	// print the type of pokemon for each pokemon in the player's lineup
+	for (int n = 0; n < lineup.size(); n++) {
+		//cout << "	Type: " << lineup->getCharacter(n)->getType() << endl;
+		//cout << "		Remaining Health: " << lineup->getCharacter(n)->getHealth() << endl;
+	}
+}
+
+//int Trainer::getLineupQty()
+//{
+//	return lineup->getQuantity();
+//}
+
 
 //########################################
 //  Sparty (Character) member functions  #

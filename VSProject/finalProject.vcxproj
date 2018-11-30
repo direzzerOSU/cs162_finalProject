@@ -106,7 +106,6 @@
   <ItemGroup>
     <ClCompile Include="board.cpp" />
     <ClCompile Include="character.cpp" />
-    <ClCompile Include="CircularLinkedList.cpp" />
     <ClCompile Include="inputValidation.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="menu.cpp" />
@@ -114,9 +113,11 @@
   <ItemGroup>
     <ClInclude Include="board.hpp" />
     <ClInclude Include="character.hpp" />
-    <ClInclude Include="CircularLinkedList.hpp" />
     <ClInclude Include="inputValidation.hpp" />
     <ClInclude Include="menu.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="makefile" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
