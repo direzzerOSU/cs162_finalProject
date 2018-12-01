@@ -26,6 +26,10 @@ class Board {
 	 void set(int, int, Character*);
 	 void placeTrainer(Character*);
 	 void placeItems();
+	 bool moveRight(Character*);
+	 bool moveLeft(Character*);
+	 bool moveUp(Character*);
+	 bool moveDown(Character*);
  private:
 	 Character*** board;
 	 int dimensions = 10;

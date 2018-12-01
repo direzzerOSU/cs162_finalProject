@@ -8,6 +8,7 @@
 
 #include "character.hpp"
 #include "inputValidation.hpp"
+#include "circularLinkedList.hpp"
 
 // Character member functions
 
@@ -46,19 +47,24 @@ std::string Character::getType() {
 
 // default destructor of the Trainer inherited class
 Trainer::~Trainer() {
-	while (!lineup.empty()) {
-		delete lineup.front();
-		lineup.pop();
+	while (!lineup->isEmpty()) {
+		delete lineup->getFront();
+		lineup->removeFront();
 	}
 }
 
 // menu for the user to select all of his/her pokemon (until the lineup is full)
 void Trainer::selectLineup() {
+	// make sure the lineup container object is available
+	if (lineup == nullptr) {
+		lineup = new Queue();
+	}
+
 	cout << "Please select your pokemon lineup..." << endl;
 	cout << "Your pokemon lineup will be used to battle other pokemon and/or trainers." << endl;
 
 	// prompt the menu of possible pokemon to choose from until the user has chosen all his/her pokemon
-	while (lineup.size() < numPokemon) {
+	while (lineup->size() < numPokemon) {
 		cout << "1. Sparty (the Spartan)" << endl;
 		cout << "2. Bieber (the Beaver)" << endl;
 		cout << "3. Wonky (the Wolverine)" << endl;
@@ -80,25 +86,25 @@ void Trainer::selectLineup() {
 		// add sparty to the player's lineup
 		if(choice == 1) {
 			Character* sparty = new Sparty();
-			lineup.push(sparty);
+			lineup->addBack(sparty);
 		}
 
 		// add bieber to the player's lineup
 		else if (choice == 2) {
 			Character* bieber = new Bieber();
-			lineup.push(bieber);
+			lineup->addBack(bieber);
 		}
 
 		// add wonky to the player's lineup
 		else if (choice == 3) {
 			Character* wonky = new Wonky();
-			lineup.push(wonky);
+			lineup->addBack(wonky);
 		}
 
 		// add hocus pocus to the player's lineup
 		else if (choice == 4) {
 			Character* hocuspocus = new HocusPocus();
-			lineup.push(hocuspocus);
+			lineup->addBack(hocuspocus);
 		}
 
 		// notify the user of a bug within the program
@@ -120,19 +126,19 @@ void Trainer::defending(int attackValue) {
 
 // print stats
 void Trainer::printStats() {
-	cout << "Remaining Pokemon: " << lineup.size() << endl;
+	cout << "Remaining Pokemon: " << lineup->size() << endl;
 
 	// print the type of pokemon for each pokemon in the player's lineup
-	for (int n = 0; n < lineup.size(); n++) {
-		//cout << "	Type: " << lineup->getCharacter(n)->getType() << endl;
-		//cout << "		Remaining Health: " << lineup->getCharacter(n)->getHealth() << endl;
+	for (int n = 0; n < lineup->size(); n++) {
+		cout << "	Type: " << lineup->getCharacter(n)->getType() << endl;
+		cout << "		Remaining Health: " << lineup->getCharacter(n)->getHealth() << endl;
 	}
 }
 
-//int Trainer::getLineupQty()
-//{
-//	return lineup->getQuantity();
-//}
+// returns the size of the player's lineup
+int Trainer::getLineupQty() {
+	return lineup->size();
+}
 
 
 //########################################

@@ -8,6 +8,9 @@
 #ifndef MENU_H
 #define MENU_H
 
+#include "board.hpp"
+#include "character.hpp"
+
 #include<fstream>
 using std::ifstream;
 using std::ofstream;
@@ -23,6 +26,7 @@ void introMenu(bool&);
 void GameMenu(int&);
 void mainMenuReturn(bool&);
 void instructions(bool&);
-void movePlayer();
+void movePlayer(Board*, Character*);
 void yesOrNo(int);
+void turnMenu(Board*, Character*, bool&);
 #endif

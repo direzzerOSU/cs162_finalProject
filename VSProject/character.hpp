@@ -9,7 +9,7 @@
 #ifndef CHARACTER_H
 #define CHARACTER_H
 
-//#include "CircularLinkedList.hpp"
+#include "circularLinkedList.hpp"
 
 #include<queue>
 #include<iostream>
@@ -20,6 +20,9 @@ using std::cin;
 using std::string;
 #include<vector>
 using std::vector;
+
+// forward declaration of class
+class Queue;
 
 // base class for different characters within the game
 class Character {
@@ -56,9 +59,10 @@ class Trainer : public Character {
 	 int attacking();
 	 void defending(int);
 	 void printStats();
-	 //int getLineupQty();
+	 int getLineupQty();
  private: 
-	 std::queue<Character*> lineup;	// list of pokemon that the trainer has
+	 Queue* lineup = nullptr;	// list of pokemon that the trainer has
+	 Queue* backpack = nullptr;
 	 int numPokemon = 3;
 };
 

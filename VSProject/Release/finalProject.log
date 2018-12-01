@@ -1,0 +1,64 @@
+﻿  board.cpp
+c:\users\direz\onedrive\documents\github\cs162_finalproject\vsproject\circularlinkedlist.hpp(18): error C2143: syntax error: missing ';' before '*'
+c:\users\direz\onedrive\documents\github\cs162_finalproject\vsproject\circularlinkedlist.hpp(18): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+c:\users\direz\onedrive\documents\github\cs162_finalproject\vsproject\circularlinkedlist.hpp(18): error C2238: unexpected token(s) preceding ';'
+c:\users\direz\onedrive\documents\github\cs162_finalproject\vsproject\circularlinkedlist.hpp(25): error C2061: syntax error: identifier 'Character'
+c:\users\direz\onedrive\documents\github\cs162_finalproject\vsproject\circularlinkedlist.hpp(25): error C2535: 'Queue::Queue(void)': member function already defined or declared
+  c:\users\direz\onedrive\documents\github\cs162_finalproject\vsproject\circularlinkedlist.hpp(24): note: see declaration of 'Queue::Queue'
+c:\users\direz\onedrive\documents\github\cs162_finalproject\vsproject\circularlinkedlist.hpp(28): error C2061: syntax error: identifier 'Character'
+c:\users\direz\onedrive\documents\github\cs162_finalproject\vsproject\circularlinkedlist.hpp(29): error C2143: syntax error: missing ';' before '*'
+c:\users\direz\onedrive\documents\github\cs162_finalproject\vsproject\circularlinkedlist.hpp(29): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+c:\users\direz\onedrive\documents\github\cs162_finalproject\vsproject\circularlinkedlist.hpp(29): error C2238: unexpected token(s) preceding ';'
+c:\users\direz\onedrive\documents\github\cs162_finalproject\vsproject\circularlinkedlist.hpp(31): error C2143: syntax error: missing ';' before '*'
+c:\users\direz\onedrive\documents\github\cs162_finalproject\vsproject\circularlinkedlist.hpp(31): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+c:\users\direz\onedrive\documents\github\cs162_finalproject\vsproject\circularlinkedlist.hpp(31): error C2238: unexpected token(s) preceding ';'
+  character.cpp
+c:\users\direz\onedrive\documents\github\cs162_finalproject\vsproject\circularlinkedlist.hpp(18): error C2143: syntax error: missing ';' before '*'
+c:\users\direz\onedrive\documents\github\cs162_finalproject\vsproject\circularlinkedlist.hpp(18): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+c:\users\direz\onedrive\documents\github\cs162_finalproject\vsproject\circularlinkedlist.hpp(18): error C2238: unexpected token(s) preceding ';'
+c:\users\direz\onedrive\documents\github\cs162_finalproject\vsproject\circularlinkedlist.hpp(25): error C2061: syntax error: identifier 'Character'
+c:\users\direz\onedrive\documents\github\cs162_finalproject\vsproject\circularlinkedlist.hpp(25): error C2535: 'Queue::Queue(void)': member function already defined or declared
+  c:\users\direz\onedrive\documents\github\cs162_finalproject\vsproject\circularlinkedlist.hpp(24): note: see declaration of 'Queue::Queue'
+c:\users\direz\onedrive\documents\github\cs162_finalproject\vsproject\circularlinkedlist.hpp(28): error C2061: syntax error: identifier 'Character'
+c:\users\direz\onedrive\documents\github\cs162_finalproject\vsproject\circularlinkedlist.hpp(29): error C2143: syntax error: missing ';' before '*'
+c:\users\direz\onedrive\documents\github\cs162_finalproject\vsproject\circularlinkedlist.hpp(29): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+c:\users\direz\onedrive\documents\github\cs162_finalproject\vsproject\circularlinkedlist.hpp(29): error C2238: unexpected token(s) preceding ';'
+c:\users\direz\onedrive\documents\github\cs162_finalproject\vsproject\circularlinkedlist.hpp(31): error C2143: syntax error: missing ';' before '*'
+c:\users\direz\onedrive\documents\github\cs162_finalproject\vsproject\circularlinkedlist.hpp(31): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+c:\users\direz\onedrive\documents\github\cs162_finalproject\vsproject\circularlinkedlist.hpp(31): error C2238: unexpected token(s) preceding ';'
+c:\users\direz\onedrive\documents\github\cs162_finalproject\vsproject\character.cpp(51): error C2039: 'getFront': is not a member of 'Queue'
+  c:\users\direz\onedrive\documents\github\cs162_finalproject\vsproject\circularlinkedlist.hpp(22): note: see declaration of 'Queue'
+c:\users\direz\onedrive\documents\github\cs162_finalproject\vsproject\character.cpp(84): error C2660: 'Queue::addBack': function does not take 1 arguments
+  c:\users\direz\onedrive\documents\github\cs162_finalproject\vsproject\circularlinkedlist.hpp(28): note: see declaration of 'Queue::addBack'
+c:\users\direz\onedrive\documents\github\cs162_finalproject\vsproject\character.cpp(90): error C2660: 'Queue::addBack': function does not take 1 arguments
+  c:\users\direz\onedrive\documents\github\cs162_finalproject\vsproject\circularlinkedlist.hpp(28): note: see declaration of 'Queue::addBack'
+c:\users\direz\onedrive\documents\github\cs162_finalproject\vsproject\character.cpp(96): error C2660: 'Queue::addBack': function does not take 1 arguments
+  c:\users\direz\onedrive\documents\github\cs162_finalproject\vsproject\circularlinkedlist.hpp(28): note: see declaration of 'Queue::addBack'
+c:\users\direz\onedrive\documents\github\cs162_finalproject\vsproject\character.cpp(102): error C2660: 'Queue::addBack': function does not take 1 arguments
+  c:\users\direz\onedrive\documents\github\cs162_finalproject\vsproject\circularlinkedlist.hpp(28): note: see declaration of 'Queue::addBack'
+c:\users\direz\onedrive\documents\github\cs162_finalproject\vsproject\character.cpp(128): error C2039: 'getCharacter': is not a member of 'Queue'
+  c:\users\direz\onedrive\documents\github\cs162_finalproject\vsproject\circularlinkedlist.hpp(22): note: see declaration of 'Queue'
+c:\users\direz\onedrive\documents\github\cs162_finalproject\vsproject\character.cpp(129): error C2039: 'getCharacter': is not a member of 'Queue'
+  c:\users\direz\onedrive\documents\github\cs162_finalproject\vsproject\circularlinkedlist.hpp(22): note: see declaration of 'Queue'
+  circularLinkedList.cpp
+c:\users\direz\onedrive\documents\github\cs162_finalproject\vsproject\character.hpp(61): error C3646: 'lineup': unknown override specifier
+c:\users\direz\onedrive\documents\github\cs162_finalproject\vsproject\character.hpp(61): error C2059: syntax error: '='
+c:\users\direz\onedrive\documents\github\cs162_finalproject\vsproject\character.hpp(61): error C2238: unexpected token(s) preceding ';'
+  inputValidation.cpp
+  main.cpp
+c:\users\direz\onedrive\documents\github\cs162_finalproject\vsproject\circularlinkedlist.hpp(18): error C2143: syntax error: missing ';' before '*'
+c:\users\direz\onedrive\documents\github\cs162_finalproject\vsproject\circularlinkedlist.hpp(18): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+c:\users\direz\onedrive\documents\github\cs162_finalproject\vsproject\circularlinkedlist.hpp(18): error C2238: unexpected token(s) preceding ';'
+c:\users\direz\onedrive\documents\github\cs162_finalproject\vsproject\circularlinkedlist.hpp(25): error C2061: syntax error: identifier 'Character'
+c:\users\direz\onedrive\documents\github\cs162_finalproject\vsproject\circularlinkedlist.hpp(25): error C2535: 'Queue::Queue(void)': member function already defined or declared
+  c:\users\direz\onedrive\documents\github\cs162_finalproject\vsproject\circularlinkedlist.hpp(24): note: see declaration of 'Queue::Queue'
+c:\users\direz\onedrive\documents\github\cs162_finalproject\vsproject\circularlinkedlist.hpp(28): error C2061: syntax error: identifier 'Character'
+c:\users\direz\onedrive\documents\github\cs162_finalproject\vsproject\circularlinkedlist.hpp(29): error C2143: syntax error: missing ';' before '*'
+c:\users\direz\onedrive\documents\github\cs162_finalproject\vsproject\circularlinkedlist.hpp(29): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+c:\users\direz\onedrive\documents\github\cs162_finalproject\vsproject\circularlinkedlist.hpp(29): error C2238: unexpected token(s) preceding ';'
+c:\users\direz\onedrive\documents\github\cs162_finalproject\vsproject\circularlinkedlist.hpp(31): error C2143: syntax error: missing ';' before '*'
+c:\users\direz\onedrive\documents\github\cs162_finalproject\vsproject\circularlinkedlist.hpp(31): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+c:\users\direz\onedrive\documents\github\cs162_finalproject\vsproject\circularlinkedlist.hpp(31): error C2238: unexpected token(s) preceding ';'
+c:\users\direz\onedrive\documents\github\cs162_finalproject\vsproject\main.cpp(19): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  menu.cpp
+  Generating Code...

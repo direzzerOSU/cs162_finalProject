@@ -171,7 +171,7 @@ void mainMenuReturn(bool& status) {
 }
 
 // menu for the player to move his/her player within the board
-void movePlayer() {
+void movePlayer(Board* b, Character* c) {
 	// menu choices
 	cout << "Where would you like to move?" << endl;
 	cout << "	1. Up" << endl;
@@ -195,22 +195,70 @@ void movePlayer() {
 
 	// move up
 	if (selection == 1) {
+		b->moveUp(c);
 	}
 
 	// move right
 	else if (selection == 2) {
+		b->moveRight(c);
 	}
 
 	// move down
 	else if (selection == 3) {
+		b->moveDown(c);
 	}
 
 	// move left
 	else if (selection == 4) {
+		b->moveLeft(c);
 	}
 
 	// catch an error with debugging
 	else {
 		cout << endl << "[ERROR] void movePlayer()" << endl << endl;
+	}
+}
+
+// player menu that appears at the start of each turn
+void turnMenu(Board* b, Character* c, bool& gameStatus) {
+	cout << "What would you like to do? Please use the menu to move and manage your character..." << endl;
+
+	// display menu
+	cout << endl << "Menu: " << endl;
+	cout << "	1. Move player" << endl;
+	cout << "	2. View lineup of monsters" << endl;
+	cout << "	3. View backpack of items" << endl;
+	cout << "	4. Quit the current game" << endl;
+
+	// accept user input
+	int x = -10;
+	cin >> x;
+	intValidation(x);
+
+	// verify a valid menu option was chosen
+	while (x != 1 && x != 2 && x != 3 && x != 4) {
+		cout << "Whoops! You didn't select a valid menu option... Please try again..." << endl;
+		cin >> x;
+		intValidation(x);
+	}
+
+	// move player
+	if (x == 1) {
+		movePlayer(b, c);
+	}
+
+	// view lineup of monsters
+	else if (x == 2) {
+		// TODO
+	}
+
+	// view backpack items
+	else if (x == 3) {
+		// TODO
+	}
+
+	// quit the current game
+	else if (x == 4) {
+		gameStatus = false;
 	}
 }

@@ -82,8 +82,8 @@ void Board::placeTrainer(Character* trainer) {
 
 	// make sure that another object isn't occupying the map's spot
 	while (board[row][col] != nullptr) {
-		row = (rand() % dimensions) + 1;
-		col = (rand() % dimensions) + 1;
+		row = (rand() % dimensions);
+		col = (rand() % dimensions);
 	}
 
 	// place the trainer (player) on the map
@@ -133,5 +133,121 @@ void Board::placeItems() {
 				set(r, c, monster);
 			}
 		}
+	}
+}
+
+// moves the character to the right, if "legal"
+bool Board::moveRight(Character* x) {
+	// initialize variables for board coordinates
+	int row = -10;
+	int col = -10; 
+
+	// find the char's spot on the board
+	for (int r = 0; r < dimensions; r++) {
+		for (int c = 0; c < dimensions; c++) {
+			if (board[r][c] == x) {
+				row = r;
+				col = c;
+			}
+		}
+	}
+
+	// make sure it's legal to move right
+	if (col + 1 != dimensions) {
+		board[row][col + 1] = x;	// move position
+		board[row][col] = nullptr;	// update previous position
+
+		return true;
+	}
+
+	else {
+		return false;
+	}
+}
+
+// moves the char to the left, if "legal"
+bool Board::moveLeft(Character* x) {
+	// initialize variables for board coordinates
+	int row = -10;
+	int col = -10;
+
+	// find the char's spot on the board
+	for (int r = 0; r < dimensions; r++) {
+		for (int c = 0; c < dimensions; c++) {
+			if (board[r][c] == x) {
+				row = r;
+				col = c;
+			}
+		}
+	}
+
+	// make sure it's legal to move left
+	if (col - 1 != dimensions) {
+		board[row][col - 1] = x;	// move position
+		board[row][col] = nullptr;	// update previous position
+
+		return true;
+	}
+
+	else {
+		return false;
+	}
+}
+
+// move the character up, if "legal"
+bool Board::moveUp(Character* x) {
+	// initialize variables for board coordinates
+	int row = -10;
+	int col = -10;
+
+	// find the char's spot on the board
+	for (int r = 0; r < dimensions; r++) {
+		for (int c = 0; c < dimensions; c++) {
+			if (board[r][c] == x) {
+				row = r;
+				col = c;
+			}
+		}
+	}
+
+	// make sure it's legal to move up
+	if (row - 1 != dimensions) {
+		board[row - 1][col] = x;	// move position
+		board[row][col] = nullptr;	// update previous position
+
+		return true;
+	}
+
+	else {
+		return false;
+	}
+}
+
+// move the character down, if "legal"
+bool Board::moveDown(Character* x) {
+	// initialize variables for board coordinates
+	int row = -10;
+	int col = -10;
+
+	// find the char's spot on the board
+	for (int r = 0; r < dimensions; r++) {
+		for (int c = 0; c < dimensions; c++) {
+			if (board[r][c] == x) {
+				row = r;
+				col = c;
+			}
+		}
+	}
+
+	// make sure it's legal to move down
+	if (row + 1 != dimensions) {
+		board[row + 1][col] = x;	// move position
+		board[row][col] = nullptr;	// update previous position
+
+		return true;
+	}
+
+	else {
+		return false;
 	}
 }
