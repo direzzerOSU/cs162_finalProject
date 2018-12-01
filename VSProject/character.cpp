@@ -114,6 +114,11 @@ void Trainer::selectLineup() {
 	}
 }
 
+// checks to see if the player's lineup is empty
+bool Trainer::emptyLineup() {
+	return lineup->isEmpty();
+}
+
 // attack function (should do nothing)
 int Trainer::attacking() {
 	int x = 0;
@@ -133,6 +138,42 @@ void Trainer::printStats() {
 		cout << "	Type: " << lineup->getCharacter(n)->getType() << endl;
 		cout << "		Remaining Health: " << lineup->getCharacter(n)->getHealth() << endl;
 	}
+}
+
+// returns the first monster in the player's lineup (of monsters)
+Character* Trainer::getFrontMonster() {
+	return lineup->getFront();
+}
+
+// returns a specific monster in the player's lineup (of monsters)
+Character* Trainer::getMonster(int n) {
+	return lineup->getCharacter(n);
+}
+
+// prompts the user to select a specific monster from his/her lineup
+Character* Trainer::getMonsterPrompt() {
+	cout << "What monster do you want to use in combat from your lineup?" << endl;
+	cout << "(Select the monster's corresponding number)" << endl;
+
+	// print the player's lineup
+	cout << endl << "Lineup: " << endl;
+	for (int n = 0; n < lineup->size(); n++) {
+		cout << "	" << n + 1 << ". " << lineup->getCharacter(n)->getType() << endl;
+	}
+
+	// acquire user input for the monster selection in combat
+	int selection = -10;
+	cin >> selection;
+	intValidation(selection);
+
+	// ensure the user chose a valid option
+	while (selection > lineup->size()) {
+		cin >> selection;
+		intValidation(selection);
+	}
+
+	// return the player's chosen monster (from his/her lineup)
+	return lineup->getCharacter(selection - 1);
 }
 
 // returns the size of the player's lineup

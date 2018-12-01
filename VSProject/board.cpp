@@ -69,6 +69,63 @@ void Board::print() {
 	cout << "----" << endl;
 }
 
+// executes a fight between the player and a (sole) monster (on the board)
+void Board::fight(Trainer* player, Character* monster) {
+
+	// fights until either all player's monsters die or the opponent monster dies
+	while (player->emptyLineup() == false && monster->getHealth() > 0) {
+		// get player's monster
+		Character* friendly = player->getMonsterPrompt();
+
+		// rounds of combat until one monster dies
+		while (friendly->getHealth() > 0 && monster->getHealth() > 0) {
+
+			// determine who fights first based on speed
+
+			// player's monster attacks first
+			if (friendly->getSpeed() >= monster->getSpeed()) {
+				monster->defending(friendly->attacking());
+
+				if (monster->getHealth() > 0) {
+					friendly->defending(monster->attacking());
+				}
+
+				else {
+					cout << "Congratulations! The monster is defeated!" << endl;
+				}
+			}
+
+			// opponent monster attacks first
+			else if (monster->getSpeed() > friendly->getSpeed()) {
+				friendly->defending(monster->attacking());
+
+				if (friendly->getHealth() > 0) {
+					monster->defending(friendly->attacking());
+				}
+
+				else {
+					cout << "Uh oh! Your monster died... Please choose another to continue combat..." << endl;
+					cout << "You may also run from the opponent monster..." << endl;
+
+					int yesNo = -10;
+					cout << "Do you want to run?" << endl;
+					yesOrNo(yesNo);
+
+					// player runs
+					if (yesNo == 1) {
+						break;
+					}
+
+					// player doesn't run
+					else if (yesNo == 2) {
+						// do nothing and continue through the loops to re-select a new lineup monster
+					}
+				}
+			}
+		}
+	}
+}
+
 // re-point the board space's pointer to the character object that
 // will be "placed" on the board at that position
 void Board::set(int row, int column, Character* value) {
@@ -134,6 +191,26 @@ void Board::placeItems() {
 			}
 		}
 	}
+}
+
+// returns the monster to the player's right on the board
+Character* Board::rightMonster(Character* x) {
+	// initialize variables for board coordinates
+	int row = -10;
+	int col = -10;
+
+	// find the char's spot on the board
+	for (int r = 0; r < dimensions; r++) {
+		for (int c = 0; c < dimensions; c++) {
+			if (board[r][c] == x) {
+				row = r;
+				col = c;
+			}
+		}
+	}
+
+	// return the monster
+	return board[row][col + 1];
 }
 
 // checks to see if something occupies the space to the right of the character
@@ -207,6 +284,26 @@ bool Board::moveRight(Character* x) {
 	}
 }
 
+// returns the monster to the player's left on the board
+Character* Board::leftMonster(Character* x) {
+	// initialize variables for board coordinates
+	int row = -10;
+	int col = -10;
+
+	// find the char's spot on the board
+	for (int r = 0; r < dimensions; r++) {
+		for (int c = 0; c < dimensions; c++) {
+			if (board[r][c] == x) {
+				row = r;
+				col = c;
+			}
+		}
+	}
+
+	// return the monster
+	return board[row][col - 1];
+}
+
 // checks to see if something occupies the space to the left of the character
 bool Board::leftSpaceCheck(Character* x) {
 	// initialize variables for board coordinates
@@ -277,6 +374,26 @@ bool Board::moveLeft(Character* x) {
 	}
 }
 
+// returns the monster above the player on the board
+Character* Board::upMonster(Character* x) {
+	// initialize variables for board coordinates
+	int row = -10;
+	int col = -10;
+
+	// find the char's spot on the board
+	for (int r = 0; r < dimensions; r++) {
+		for (int c = 0; c < dimensions; c++) {
+			if (board[r][c] == x) {
+				row = r;
+				col = c;
+			}
+		}
+	}
+
+	// return the monster
+	return board[row - 1][col];
+}
+
 // checks to see if something occupies the space above the character
 bool Board::upSpaceCheck(Character* x) {
 	// initialize variables for board coordinates
@@ -345,6 +462,26 @@ bool Board::moveUp(Character* x) {
 	else {
 		return false;
 	}
+}
+
+// returns the monster below the player on the board
+Character* Board::downMonster(Character* x) {
+	// initialize variables for board coordinates
+	int row = -10;
+	int col = -10;
+
+	// find the char's spot on the board
+	for (int r = 0; r < dimensions; r++) {
+		for (int c = 0; c < dimensions; c++) {
+			if (board[r][c] == x) {
+				row = r;
+				col = c;
+			}
+		}
+	}
+
+	// return the monster
+	return board[row + 1][col];
 }
 
 // checks to see if something occupies the space below the character

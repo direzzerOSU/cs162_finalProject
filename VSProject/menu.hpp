@@ -26,7 +26,7 @@ void introMenu(bool&);
 void GameMenu(int&);
 void mainMenuReturn(bool&);
 void instructions(bool&);
-void movePlayer(Board*, Character*);
+void movePlayer(Board*, Trainer*);
 void yesOrNo(int&);
 void turnMenu(Board*, Character*, bool&);
 #endif

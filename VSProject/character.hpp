@@ -56,9 +56,14 @@ class Trainer : public Character {
 	 }
 	 ~Trainer();
 	 void selectLineup();
+	 bool emptyLineup();
+	 //bool emptyBackpack();
 	 int attacking();
 	 void defending(int);
 	 void printStats();
+	 Character* getFrontMonster();
+	 Character* getMonster(int);
+	 Character* getMonsterPrompt();
 	 int getLineupQty();
  private: 
 	 Queue* lineup = nullptr;	// list of pokemon that the trainer has

@@ -10,6 +10,7 @@
 #define BOARD_H
 
 #include "character.hpp"
+#include "menu.hpp"
 
 #include<iostream>
 using std::cout;
@@ -23,15 +24,20 @@ class Board {
 	 Board();
 	 ~Board();
 	 void print();
+	 void fight(Trainer*, Character*);
 	 void set(int, int, Character*);
 	 void placeTrainer(Character*);
 	 void placeItems();
+	 Character* rightMonster(Character*);
 	 bool rightSpaceCheck(Character*);
 	 bool moveRight(Character*);
+	 Character* leftMonster(Character*);
 	 bool leftSpaceCheck(Character*);
 	 bool moveLeft(Character*);
+	 Character* upMonster(Character*);
 	 bool upSpaceCheck(Character*);
 	 bool moveUp(Character*);
+	 Character* downMonster(Character*);
 	 bool downSpaceCheck(Character*);
 	 bool moveDown(Character*);
  private:

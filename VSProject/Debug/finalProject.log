@@ -1,7 +1,20 @@
-﻿  main.cpp
+﻿  backpack.cpp
+  board.cpp
+c:\users\direz\onedrive\documents\github\cs162_finalproject\vsproject\menu.hpp(29): error C2065: 'Board': undeclared identifier
+c:\users\direz\onedrive\documents\github\cs162_finalproject\vsproject\menu.hpp(29): error C2059: syntax error: ','
+c:\users\direz\onedrive\documents\github\cs162_finalproject\vsproject\menu.hpp(31): error C2065: 'Board': undeclared identifier
+c:\users\direz\onedrive\documents\github\cs162_finalproject\vsproject\menu.hpp(31): error C2059: syntax error: ','
+  character.cpp
+  circularLinkedList.cpp
+  main.cpp
+c:\users\direz\onedrive\documents\github\cs162_finalproject\vsproject\menu.hpp(29): error C2065: 'Board': undeclared identifier
+c:\users\direz\onedrive\documents\github\cs162_finalproject\vsproject\menu.hpp(29): error C2059: syntax error: ','
+c:\users\direz\onedrive\documents\github\cs162_finalproject\vsproject\menu.hpp(31): error C2065: 'Board': undeclared identifier
+c:\users\direz\onedrive\documents\github\cs162_finalproject\vsproject\menu.hpp(31): error C2059: syntax error: ','
 c:\users\direz\onedrive\documents\github\cs162_finalproject\vsproject\main.cpp(32): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+c:\users\direz\onedrive\documents\github\cs162_finalproject\vsproject\main.cpp(59): error C3861: 'turnMenu': identifier not found
   menu.cpp
+c:\users\direz\onedrive\documents\github\cs162_finalproject\vsproject\menu.cpp(223): error C2276: '!': illegal operation on bound member function expression
+c:\users\direz\onedrive\documents\github\cs162_finalproject\vsproject\menu.cpp(290): error C2664: 'void movePlayer(Board *,Trainer *)': cannot convert argument 2 from 'Character *' to 'Trainer *'
+  c:\users\direz\onedrive\documents\github\cs162_finalproject\vsproject\menu.cpp(290): note: Types pointed to are unrelated; conversion requires reinterpret_cast, C-style cast or function-style cast
   Generating Code...
-  backpack.obj : /DEBUG:FASTLINK is not supported when managed code is present; restarting link with /DEBUG:FULL
-  backpack.obj : MSIL module encountered; incremental linking is disabled for MSIL; performing full link
-  finalProject.vcxproj -> C:\Users\direz\OneDrive\Documents\GitHub\cs162_finalProject\VSProject\Debug\finalProject.exe

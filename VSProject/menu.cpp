@@ -44,6 +44,15 @@ void introMenu(bool& status) {
 
 // valid yes/no option input validation
 void yesOrNo(int& x) {
+	// prompt the menu choices
+	cout << "Yes or no?" << endl;
+	cout << "	1. Yes" << endl;
+	cout << "	2. No" << endl;
+
+	// acquire user input
+	cin >> x;
+	intValidation(x);
+
 	// ensure a valid choice is entered (1. Yes) or (2. No)
 	while (x != 1 && x != 2) {
 		cout << "Oops! You didn't enter a valid choice for yes or no... Please try again." << endl;
@@ -171,7 +180,7 @@ void mainMenuReturn(bool& status) {
 }
 
 // menu for the player to move his/her player within the board
-void movePlayer(Board* b, Character* c) {
+void movePlayer(Board* b, Trainer* c) {
 	// menu choices
 	cout << "Where would you like to move?" << endl;
 	cout << "	1. Up" << endl;
@@ -207,8 +216,17 @@ void movePlayer(Board* b, Character* c) {
 			// fight the monster
 			if (selection == 1) {
 				// fight the monster
+				Character* m = b->upMonster(c);
+				b->fight(c, m);
+
 				// if monster is defeated, remove monster from the board
-				b->moveUp(c);
+				if (!c->emptyLineup) {					
+					b->moveUp(c);
+				}
+				// if player is defeated
+				else {
+					cout << "Uh oh... You have been defeated..." << endl;
+				}
 			}
 
 			// do not fight the monster
