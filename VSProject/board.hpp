@@ -26,9 +26,13 @@ class Board {
 	 void set(int, int, Character*);
 	 void placeTrainer(Character*);
 	 void placeItems();
+	 bool rightSpaceCheck(Character*);
 	 bool moveRight(Character*);
+	 bool leftSpaceCheck(Character*);
 	 bool moveLeft(Character*);
+	 bool upSpaceCheck(Character*);
 	 bool moveUp(Character*);
+	 bool downSpaceCheck(Character*);
 	 bool moveDown(Character*);
  private:
 	 Character*** board;

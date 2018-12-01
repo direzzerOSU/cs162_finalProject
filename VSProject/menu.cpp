@@ -43,7 +43,7 @@ void introMenu(bool& status) {
 }
 
 // valid yes/no option input validation
-void yesOrNo(int x) {
+void yesOrNo(int& x) {
 	// ensure a valid choice is entered (1. Yes) or (2. No)
 	while (x != 1 && x != 2) {
 		cout << "Oops! You didn't enter a valid choice for yes or no... Please try again." << endl;
@@ -195,7 +195,32 @@ void movePlayer(Board* b, Character* c) {
 
 	// move up
 	if (selection == 1) {
-		b->moveUp(c);
+		// if the space is occupied
+		if (b->upSpaceCheck(c)) {
+			cout << "A monster occupies the space you're trying to move to..." << endl;
+			cout << "If you want to move to the new space, you must defeat the monster..." << endl;
+			cout << endl << "Do you want to fight the monster?" << endl;
+
+			int selection = -10;
+			yesOrNo(selection);
+
+			// fight the monster
+			if (selection == 1) {
+				// fight the monster
+				// if monster is defeated, remove monster from the board
+				b->moveUp(c);
+			}
+
+			// do not fight the monster
+			else if (selection == 2) {
+				// let the function end & return to the round/turn menu to re-select a new move or something else
+			}
+			
+			// catch a bug (wrong input)
+			else {
+				cout << "[BUG] yesOrNo(selection) in: movePlayer(Board*, Character*)..." << endl;
+			}
+		}
 	}
 
 	// move right

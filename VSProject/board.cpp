@@ -136,6 +136,47 @@ void Board::placeItems() {
 	}
 }
 
+// checks to see if something occupies the space to the right of the character
+bool Board::rightSpaceCheck(Character* x) {
+	// initialize variables for board coordinates
+	int row = -10;
+	int col = -10;
+
+	// find the char's spot on the board
+	for (int r = 0; r < dimensions; r++) {
+		for (int c = 0; c < dimensions; c++) {
+			if (board[r][c] == x) {
+				row = r;
+				col = c;
+			}
+		}
+	}
+
+	// make sure it's legal to move right
+	if (col + 1 < dimensions) {
+
+		// check to see if something is located in the space to the right
+		if (board[row][col + 1] != nullptr) {
+			return true;
+		}
+
+		// the space is NOT occupied by something else
+		else if (board[row][col + 1] == nullptr) {
+			return false;
+		}
+
+		// notify the user of a bug
+		else {
+			cout << "[BUG] board->rightSpaceCheck(Character* x)..." << endl;
+		}
+	}
+
+	// the player is at the board's border
+	else {
+		return true;
+	}
+}
+
 // moves the character to the right, if "legal"
 bool Board::moveRight(Character* x) {
 	// initialize variables for board coordinates
@@ -153,7 +194,7 @@ bool Board::moveRight(Character* x) {
 	}
 
 	// make sure it's legal to move right
-	if (col + 1 != dimensions) {
+	if (col + 1 < dimensions) {
 		board[row][col + 1] = x;	// move position
 		board[row][col] = nullptr;	// update previous position
 
@@ -161,7 +202,49 @@ bool Board::moveRight(Character* x) {
 	}
 
 	else {
+		cout << "Uh oh... You can't move to the border. Please try again..." << endl;
 		return false;
+	}
+}
+
+// checks to see if something occupies the space to the left of the character
+bool Board::leftSpaceCheck(Character* x) {
+	// initialize variables for board coordinates
+	int row = -10;
+	int col = -10;
+
+	// find the char's spot on the board
+	for (int r = 0; r < dimensions; r++) {
+		for (int c = 0; c < dimensions; c++) {
+			if (board[r][c] == x) {
+				row = r;
+				col = c;
+			}
+		}
+	}
+
+	// make sure it's legal to move left
+	if (col - 1 < dimensions) {
+
+		// check to see if something is located in the space to the left
+		if (board[row][col - 1] != nullptr) {
+			return true;
+		}
+
+		// the space is NOT occupied by something else
+		else if (board[row][col - 1] == nullptr) {
+			return false;
+		}
+
+		// notify the user of a bug
+		else {
+			cout << "[BUG] board->leftSpaceCheck(Character* x)..." << endl;
+		}
+	}
+
+	// the player is at the board's border
+	else {
+		return true;
 	}
 }
 
@@ -182,7 +265,7 @@ bool Board::moveLeft(Character* x) {
 	}
 
 	// make sure it's legal to move left
-	if (col - 1 != dimensions) {
+	if (col - 1 < dimensions) {
 		board[row][col - 1] = x;	// move position
 		board[row][col] = nullptr;	// update previous position
 
@@ -191,6 +274,47 @@ bool Board::moveLeft(Character* x) {
 
 	else {
 		return false;
+	}
+}
+
+// checks to see if something occupies the space above the character
+bool Board::upSpaceCheck(Character* x) {
+	// initialize variables for board coordinates
+	int row = -10;
+	int col = -10;
+
+	// find the char's spot on the board
+	for (int r = 0; r < dimensions; r++) {
+		for (int c = 0; c < dimensions; c++) {
+			if (board[r][c] == x) {
+				row = r;
+				col = c;
+			}
+		}
+	}
+
+	// make sure it's legal to move up
+	if (row - 1 < dimensions) {
+
+		// check to see if something is located in the above space 
+		if (board[row - 1][col] != nullptr) {
+			return true;
+		}
+
+		// the space is NOT occupied by something else
+		else if (board[row - 1][col] == nullptr) {
+			return false;
+		}
+
+		// notify the user of a bug
+		else {
+			cout << "[BUG] board->upSpaceCheck(Character* x)..." << endl;
+		}
+	}
+
+	// the player is at the board's border
+	else {
+		return true;
 	}
 }
 
@@ -211,7 +335,7 @@ bool Board::moveUp(Character* x) {
 	}
 
 	// make sure it's legal to move up
-	if (row - 1 != dimensions) {
+	if (row - 1 < dimensions) {
 		board[row - 1][col] = x;	// move position
 		board[row][col] = nullptr;	// update previous position
 
@@ -220,6 +344,47 @@ bool Board::moveUp(Character* x) {
 
 	else {
 		return false;
+	}
+}
+
+// checks to see if something occupies the space below the character
+bool Board::downSpaceCheck(Character* x) {
+	// initialize variables for board coordinates
+	int row = -10;
+	int col = -10;
+
+	// find the char's spot on the board
+	for (int r = 0; r < dimensions; r++) {
+		for (int c = 0; c < dimensions; c++) {
+			if (board[r][c] == x) {
+				row = r;
+				col = c;
+			}
+		}
+	}
+
+	// make sure it's legal to move down
+	if (row + 1 < dimensions) {
+
+		// check to see if something is located in the below space
+		if (board[row + 1][col] != nullptr) {
+			return true;
+		}
+
+		// the space is NOT occupied by something else
+		else if (board[row + 1][col] == nullptr) {
+			return false;
+		}
+
+		// notify the user of a bug
+		else {
+			cout << "[BUG] board->upSpaceCheck(Character* x)..." << endl;
+		}
+	}
+
+	// the player is at the board's border
+	else {
+		return true;
 	}
 }
 
@@ -240,7 +405,7 @@ bool Board::moveDown(Character* x) {
 	}
 
 	// make sure it's legal to move down
-	if (row + 1 != dimensions) {
+	if (row + 1 < dimensions) {
 		board[row + 1][col] = x;	// move position
 		board[row][col] = nullptr;	// update previous position
 
