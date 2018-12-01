@@ -7,11 +7,11 @@ CXXFLAGS = -std=c++0x
 #CXXFLAGS += -O3
 #LDFLAGS = -lboost_date_time
 
-OBJS = main.o menu.o inputValidation.o character.o board.o circularLinkedList.o
+OBJS = main.o menu.o inputValidation.o character.o board.o circularLinkedList.o backpack.o
 
-SRCS = main.cpp menu.cpp inputValidation.cpp character.cpp board.cpp circularLinkedList.cpp
+SRCS = main.cpp menu.cpp inputValidation.cpp character.cpp board.cpp circularLinkedList.cpp backpack.cpp
 
-HEADERS = menu.hpp inputValidation.hpp character.hpp board.hpp circularLinkedList.hpp
+HEADERS = menu.hpp inputValidation.hpp character.hpp board.hpp circularLinkedList.hpp backpack.hpp
 
 #target: dependencies
 #	rule to build

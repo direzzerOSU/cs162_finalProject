@@ -11,10 +11,16 @@
 #include "menu.hpp"
 #include "character.hpp"
 #include "circularLinkedList.hpp"
+#include "backpack.hpp"
 
-// forward declarations of classes
+// forward declarations of classes & structs
+struct QueueNode;
 class Queue;
+struct itemNode;
+class itemQueue;
 class Character;
+class Backpack;
+struct Item;
 
 // Visual Studio memory tool
 //#include "vld.h"		// visual studio debugging tool (memory leak check)

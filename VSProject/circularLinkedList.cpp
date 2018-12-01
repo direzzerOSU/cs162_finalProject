@@ -8,6 +8,7 @@
 
 #include "circularLinkedList.hpp"
 
+// default constructor for a queue of characters
 Queue::Queue(Character* value) {
 	head->val = value;
 }
@@ -178,12 +179,12 @@ int Queue::size() {
 //###########################################################################
 // item queue (circular linked list)
 
-//// default constructor of an (item) queue for the player's backpack
-//itemQueue::itemQueue() {
-//	head = new itemNode();
-//}
-//
-//// default destructor of an (item) queue for the player's backpack
-//itemQueue::~itemQueue() {
-//
-//}
+// default constructor of an (item) queue for the player's backpack
+itemQueue::itemQueue() {
+	head = new itemNode();
+}
+
+// default destructor of an (item) queue for the player's backpack
+itemQueue::~itemQueue() {
+
+}

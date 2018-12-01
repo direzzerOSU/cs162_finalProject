@@ -23,8 +23,10 @@ using std::string;
 class Character;
 class Queue;
 struct QueueNode;
-//struct Item;
-//class Backpack;
+struct Item;
+class Backpack;
+struct itemNode;
+class itemQueue;
 
 // defines a node within the below class (linked list)
 struct QueueNode {
@@ -53,28 +55,27 @@ class Queue {
 
 //#########################################################
 
-//// defines a node within the below class (linked list)
-//struct itemNode {
-//	QueueNode* next = nullptr;
-//	QueueNode* prev = nullptr;
-//	Item* val = nullptr;
-//};
-//
-//// defines a linked list of nodes (above structure)
-//class itemQueue {
-//public:
-//	itemQueue() {};
-//	//itemQueue(Item*);
-//	~itemQueue();
-//	bool isEmpty();
-//	void addBack(Item*);
-//	Item* getFront();
-//	void removeFront();
-//	Item* getCharacter(int);
-//	int size();
-//	//void print();
-//	//void reversePrint();
-//private:
-//	itemNode* head = nullptr;
-//};
+// defines a node within the below class (linked list)
+struct itemNode {
+	QueueNode* next = nullptr;
+	QueueNode* prev = nullptr;
+	Item* val = nullptr;
+};
+
+// defines a linked list of nodes (above structure)
+class itemQueue {
+public:
+	itemQueue();
+	~itemQueue();
+	//bool isEmpty();
+	//void addBack(Item*);
+	//Item* getFront();
+	//void removeFront();
+	//Item* getCharacter(int);
+	//int size();
+	//void print();
+	//void reversePrint();
+private:
+	itemNode* head = nullptr;
+};
 #endif
