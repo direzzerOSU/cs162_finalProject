@@ -70,12 +70,13 @@ void Board::print() {
 }
 
 // executes a fight between the player and a (sole) monster (on the board)
-void Board::fight(Trainer* player, Character* monster) {
+void Board::fight(Character* player, Character* monster) {
+	cout << endl << "----------------------------------------" << endl << endl;
 
 	// fights until either all player's monsters die or the opponent monster dies
-	while (player->emptyLineup() == false && monster->getHealth() > 0) {
+	while (static_cast<Trainer*>(player)->emptyLineup() == false && monster->getHealth() > 0) {
 		// get player's monster
-		Character* friendly = player->getMonsterPrompt();
+		Character* friendly = static_cast<Trainer*>(player)->getMonsterPrompt();
 
 		// rounds of combat until one monster dies
 		while (friendly->getHealth() > 0 && monster->getHealth() > 0) {
@@ -122,6 +123,7 @@ void Board::fight(Trainer* player, Character* monster) {
 					}
 				}
 			}
+			cout << endl << "----------------------------------------" << endl << endl;
 		}
 	}
 }

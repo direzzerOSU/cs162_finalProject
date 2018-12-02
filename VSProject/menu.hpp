@@ -11,6 +11,9 @@
 #include "board.hpp"
 #include "character.hpp"
 
+// forward declarations (of classes & structs)
+class Board;
+
 #include<fstream>
 using std::ifstream;
 using std::ofstream;
@@ -26,7 +29,7 @@ void introMenu(bool&);
 void GameMenu(int&);
 void mainMenuReturn(bool&);
 void instructions(bool&);
-void movePlayer(Board*, Trainer*);
+void movePlayer(Board*, Character*);
 void yesOrNo(int&);
 void turnMenu(Board*, Character*, bool&);
 #endif

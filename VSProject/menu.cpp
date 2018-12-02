@@ -180,7 +180,10 @@ void mainMenuReturn(bool& status) {
 }
 
 // menu for the player to move his/her player within the board
-void movePlayer(Board* b, Trainer* c) {
+void movePlayer(Board* b, Character* c) {
+	//Trainer* c;
+	//c = t;
+
 	// menu choices
 	cout << "Where would you like to move?" << endl;
 	cout << "	1. Up" << endl;
@@ -220,7 +223,7 @@ void movePlayer(Board* b, Trainer* c) {
 				b->fight(c, m);
 
 				// if monster is defeated, remove monster from the board
-				if (!c->emptyLineup) {					
+				if (!static_cast<Trainer*>(c)->emptyLineup()) {					
 					b->moveUp(c);
 				}
 				// if player is defeated
@@ -239,23 +242,136 @@ void movePlayer(Board* b, Trainer* c) {
 				cout << "[BUG] yesOrNo(selection) in: movePlayer(Board*, Character*)..." << endl;
 			}
 		}
+		else {
+			b->moveUp(c);
+		}
 	}
 
 	// move right
 	else if (selection == 2) {
-		b->moveRight(c);
+		// if the space is occupied
+		if (b->rightSpaceCheck(c)) {
+			cout << "A monster occupies the space you're trying to move to..." << endl;
+			cout << "If you want to move to the new space, you must defeat the monster..." << endl;
+			cout << endl << "Do you want to fight the monster?" << endl;
+
+			int selection = -10;
+			yesOrNo(selection);
+
+			// fight the monster
+			if (selection == 1) {
+				// fight the monster
+				Character* m = b->rightMonster(c);
+				b->fight(c, m);
+
+				// if monster is defeated, remove monster from the board
+				if (!static_cast<Trainer*>(c)->emptyLineup()) {
+					b->moveRight(c);
+				}
+				// if player is defeated
+				else {
+					cout << "Uh oh... You have been defeated..." << endl;
+				}
+			}
+
+			// do not fight the monster
+			else if (selection == 2) {
+				// let the function end & return to the round/turn menu to re-select a new move or something else
+			}
+
+			// catch a bug (wrong input)
+			else {
+				cout << "[BUG] yesOrNo(selection) in: movePlayer(Board*, Character*)..." << endl;
+			}
+		}
+		else {
+			b->moveRight(c);
+		}
 	}
 
 	// move down
 	else if (selection == 3) {
-		b->moveDown(c);
+		// if the space is occupied
+		if (b->downSpaceCheck(c)) {
+			cout << "A monster occupies the space you're trying to move to..." << endl;
+			cout << "If you want to move to the new space, you must defeat the monster..." << endl;
+			cout << endl << "Do you want to fight the monster?" << endl;
+
+			int selection = -10;
+			yesOrNo(selection);
+
+			// fight the monster
+			if (selection == 1) {
+				// fight the monster
+				Character* m = b->downMonster(c);
+				b->fight(c, m);
+
+				// if monster is defeated, remove monster from the board
+				if (!static_cast<Trainer*>(c)->emptyLineup()) {
+					b->moveDown(c);
+				}
+				// if player is defeated
+				else {
+					cout << "Uh oh... You have been defeated..." << endl;
+				}
+			}
+
+			// do not fight the monster
+			else if (selection == 2) {
+				// let the function end & return to the round/turn menu to re-select a new move or something else
+			}
+
+			// catch a bug (wrong input)
+			else {
+				cout << "[BUG] yesOrNo(selection) in: movePlayer(Board*, Character*)..." << endl;
+			}
+		}
+		else {
+			b->moveDown(c);
+		}
 	}
 
 	// move left
 	else if (selection == 4) {
-		b->moveLeft(c);
-	}
+		// if the space is occupied
+		if (b->leftSpaceCheck(c)) {
+			cout << "A monster occupies the space you're trying to move to..." << endl;
+			cout << "If you want to move to the new space, you must defeat the monster..." << endl;
+			cout << endl << "Do you want to fight the monster?" << endl;
 
+			int selection = -10;
+			yesOrNo(selection);
+
+			// fight the monster
+			if (selection == 1) {
+				// fight the monster
+				Character* m = b->leftMonster(c);
+				b->fight(c, m);
+
+				// if monster is defeated, remove monster from the board
+				if (!static_cast<Trainer*>(c)->emptyLineup()) {
+					b->moveLeft(c);
+				}
+				// if player is defeated
+				else {
+					cout << "Uh oh... You have been defeated..." << endl;
+				}
+			}
+
+			// do not fight the monster
+			else if (selection == 2) {
+				// let the function end & return to the round/turn menu to re-select a new move or something else
+			}
+
+			// catch a bug (wrong input)
+			else {
+				cout << "[BUG] yesOrNo(selection) in: movePlayer(Board*, Character*)..." << endl;
+			}
+		}
+		else {
+			b->moveLeft(c);
+		}
+	}
 	// catch an error with debugging
 	else {
 		cout << endl << "[ERROR] void movePlayer()" << endl << endl;
@@ -275,6 +391,7 @@ void turnMenu(Board* b, Character* c, bool& gameStatus) {
 
 	// accept user input
 	int x = -10;
+	cout << endl << "Selection: ";
 	cin >> x;
 	intValidation(x);
 

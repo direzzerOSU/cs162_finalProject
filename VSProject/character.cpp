@@ -41,6 +41,17 @@ std::string Character::getType() {
 	return charType;
 }
 
+// adds a monster to the player's lineup
+void Character::addLineup(Character* x) {
+	lineup->addBack(x);
+}
+
+// initialize lineup within the player
+void Character::createLineup() {
+	lineup = new Queue();
+	backpack = new Queue();
+}
+
 //#########################################
 //  Trainer (Character) member functions  #
 //#########################################
@@ -60,11 +71,11 @@ void Trainer::selectLineup() {
 		lineup = new Queue();
 	}
 
-	cout << "Please select your pokemon lineup..." << endl;
-	cout << "Your pokemon lineup will be used to battle other pokemon and/or trainers." << endl;
+	cout << "Please select your pokemon lineup.." << endl;
+	cout << "Your pokemon lineup will be used to battle other pokemon and/or trainers." << endl << endl;
 
 	// prompt the menu of possible pokemon to choose from until the user has chosen all his/her pokemon
-	while (lineup->size() < numPokemon) {
+	while (lineup->size() < numMonsters) {
 		cout << "1. Sparty (the Spartan)" << endl;
 		cout << "2. Bieber (the Beaver)" << endl;
 		cout << "3. Wonky (the Wolverine)" << endl;
@@ -111,6 +122,8 @@ void Trainer::selectLineup() {
 		else {
 			cout << "[BUG] Input Validation didn't work as intended with selectLineup()..." << endl;
 		}
+
+		cout << endl;
 	}
 }
 
@@ -160,6 +173,7 @@ Character* Trainer::getMonsterPrompt() {
 	for (int n = 0; n < lineup->size(); n++) {
 		cout << "	" << n + 1 << ". " << lineup->getCharacter(n)->getType() << endl;
 	}
+	cout << endl;
 
 	// acquire user input for the monster selection in combat
 	int selection = -10;
@@ -188,12 +202,46 @@ int Trainer::getLineupQty() {
 
 // sparty attack
 int Sparty::attacking() {
-	return roll(weapons, 20);
+	// rolls two 6-sided dice
+	int value = 0;
+	value += roll(2, 6);
+
+	attack = value;
+	cout << "Attacker Type: " << charType << endl;
+	return value;
 }
 
 // sparty defend
-void Sparty::defending(int attack) {
-	health -= (attack - armor - shield);
+void Sparty::defending(int attacker) {
+	int defender = 0;
+
+	cout << "Defender Type: " << charType << endl;
+	cout << "Defender Armor: " << armor << endl;
+	cout << "Defender Health Points: " << health << endl;
+	cout << "Attacker's Dice Roll: " << attacker << endl;
+
+	// rolls two 6-sided dice
+	defender += roll(2, 6);
+	defense = defender;
+	cout << "Defender's Dice Roll: " << defense << endl;
+
+	int damage = attacker - defense - armor;
+
+	// apply attack & defense for any impact to strength (health)
+	if (damage > 0) {
+		health -= damage;
+		cout << "Total Inflicted Damage: " << damage << endl;
+		cout << "Defender's Updated Strength: " << health << endl;
+
+		if (health <= 0) {
+			cout << endl << getType() << " has been defeated!" << endl;
+		}
+	}
+	else {
+		// do nothing - the char defended against the attack
+		cout << "Total Inflicted Damage: 0" << endl;
+		cout << "Defender's Updated Strength: " << health << endl;
+	}
 }
 
 // prints stats
@@ -207,12 +255,46 @@ void Sparty::printStats() {
 
 // bieber attack
 int Bieber::attacking() {
-	return roll(weapons, 20);
+	// rolls two 6-sided dice
+	int value = 0;
+	value += roll(2, 6);
+
+	attack = value;
+	cout << "Attacker Type: " << charType << endl;
+	return value;
 }
 
 // bieber defend
-void Bieber::defending(int attack) {
-	health -= (attack - armor);
+void Bieber::defending(int attacker) {
+	int defender = 0;
+
+	cout << "Defender Type: " << charType << endl;
+	cout << "Defender Armor: " << armor << endl;
+	cout << "Defender Health Points: " << health << endl;
+	cout << "Attacker's Dice Roll: " << attacker << endl;
+
+	// rolls two 6-sided dice
+	defender += roll(2, 6);
+	defense = defender;
+	cout << "Defender's Dice Roll: " << defense << endl;
+
+	int damage = attacker - defense - armor;
+
+	// apply attack & defense for any impact to strength (health)
+	if (damage > 0) {
+		health -= damage;
+		cout << "Total Inflicted Damage: " << damage << endl;
+		cout << "Defender's Updated Strength: " << health << endl;
+
+		if (health <= 0) {
+			cout << endl << getType() << " has been defeated!" << endl;
+		}
+	}
+	else {
+		// do nothing - the char defended against the attack
+		cout << "Total Inflicted Damage: 0" << endl;
+		cout << "Defender's Updated Strength: " << health << endl;
+	}
 }
 
 // prints stats
@@ -226,12 +308,46 @@ void Bieber::printStats() {
 
 // wonky attack
 int Wonky::attacking() {
-	return roll(weapons, 20);
+	// rolls two 6-sided dice
+	int value = 0;
+	value += roll(2, 6);
+
+	attack = value;
+	cout << "Attacker Type: " << charType << endl;
+	return value;
 }
 
 // wonky defend
-void Wonky::defending(int attack) {
-	health -= (attack - armor);
+void Wonky::defending(int attacker) {
+	int defender = 0;
+
+	cout << "Defender Type: " << charType << endl;
+	cout << "Defender Armor: " << armor << endl;
+	cout << "Defender Health Points: " << health << endl;
+	cout << "Attacker's Dice Roll: " << attacker << endl;
+
+	// rolls two 6-sided dice
+	defender += roll(2, 6);
+	defense = defender;
+	cout << "Defender's Dice Roll: " << defense << endl;
+
+	int damage = attacker - defense - armor;
+
+	// apply attack & defense for any impact to strength (health)
+	if (damage > 0) {
+		health -= damage;
+		cout << "Total Inflicted Damage: " << damage << endl;
+		cout << "Defender's Updated Strength: " << health << endl;
+
+		if (health <= 0) {
+			cout << endl << getType() << " has been defeated!" << endl;
+		}
+	}
+	else {
+		// do nothing - the char defended against the attack
+		cout << "Total Inflicted Damage: 0" << endl;
+		cout << "Defender's Updated Strength: " << health << endl;
+	}
 }
 
 // print stats
@@ -245,12 +361,46 @@ void Wonky::printStats() {
 
 // HocusPocus attack
 int HocusPocus::attacking() {
-	return roll(weapons, 20);
+	// rolls two 6-sided dice
+	int value = 0;
+	value += roll(2, 6);
+
+	attack = value;
+	cout << "Attacker Type: " << charType << endl;
+	return value;
 }
 
 // HocusPocus defend
-void HocusPocus::defending(int attack) {
-	health -= (attack - armor);
+void HocusPocus::defending(int attacker) {
+	int defender = 0;
+
+	cout << "Defender Type: " << charType << endl;
+	cout << "Defender Armor: " << armor << endl;
+	cout << "Defender Health Points: " << health << endl;
+	cout << "Attacker's Dice Roll: " << attacker << endl;
+
+	// rolls two 6-sided dice
+	defender += roll(2, 6);
+	defense = defender;
+	cout << "Defender's Dice Roll: " << defense << endl;
+
+	int damage = attacker - defense - armor;
+
+	// apply attack & defense for any impact to strength (health)
+	if (damage > 0) {
+		health -= damage;
+		cout << "Total Inflicted Damage: " << damage << endl;
+		cout << "Defender's Updated Strength: " << health << endl;
+
+		if (health <= 0) {
+			cout << endl << getType() << " has been defeated!" << endl;
+		}
+	}
+	else {
+		// do nothing - the char defended against the attack
+		cout << "Total Inflicted Damage: 0" << endl;
+		cout << "Defender's Updated Strength: " << health << endl;
+	}
 }
 
 // print stats

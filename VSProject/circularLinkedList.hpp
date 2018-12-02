@@ -27,6 +27,7 @@ struct Item;
 class Backpack;
 struct itemNode;
 class itemQueue;
+class Trainer;
 
 // defines a node within the below class (linked list)
 struct QueueNode {
@@ -38,7 +39,11 @@ struct QueueNode {
 // defines a linked list of nodes (above structure)
 class Queue {
  public:
-	 Queue() {};
+	 Queue() {
+		 head = new QueueNode();
+		 head->next = nullptr;
+		 head->prev = nullptr;
+	 };
 	 Queue(Character*);
 	 ~Queue();
 	 bool isEmpty();
@@ -47,7 +52,7 @@ class Queue {
 	 void removeFront();
 	 Character* getCharacter(int);
 	 int size();
-	 //void print();
+	 void print();
 	 //void reversePrint();
  private:
 	 QueueNode* head = nullptr;

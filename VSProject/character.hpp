@@ -23,6 +23,9 @@ using std::vector;
 
 // forward declaration of class
 class Queue;
+struct QueueNode;
+class itemQueue;
+struct itemNode;
 
 // base class for different characters within the game
 class Character {
@@ -35,8 +38,12 @@ public:
 	std::string getType();
 	int roll(int, int);
 	int getSpeed();
+	void addLineup(Character*);
 	virtual void printStats() = 0;
+	void createLineup();
  protected:
+	Queue* lineup = nullptr;	// list of pokemon that the trainer has
+	Queue* backpack = nullptr;	
 	std::string charType = "";
 	int attack = 0;
 	int defense = 0;
@@ -52,7 +59,7 @@ class Trainer : public Character {
 	 // default constructor to initialize a trainer (with a lineup of pokemon)
 	 Trainer() : Character() {
 		 charType = "Trainer";
-		 selectLineup();
+		 //selectLineup();
 	 }
 	 ~Trainer();
 	 void selectLineup();
@@ -66,9 +73,7 @@ class Trainer : public Character {
 	 Character* getMonsterPrompt();
 	 int getLineupQty();
  private: 
-	 Queue* lineup = nullptr;	// list of pokemon that the trainer has
-	 Queue* backpack = nullptr;
-	 int numPokemon = 3;
+	 int numMonsters = 3;
 };
 
 // derived class for the pokemon, Sparty, class

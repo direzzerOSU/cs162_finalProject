@@ -24,7 +24,7 @@ class Board {
 	 Board();
 	 ~Board();
 	 void print();
-	 void fight(Trainer*, Character*);
+	 void fight(Character*, Character*);
 	 void set(int, int, Character*);
 	 void placeTrainer(Character*);
 	 void placeItems();

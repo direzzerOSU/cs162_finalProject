@@ -1,20 +1,20 @@
 ﻿  backpack.cpp
+c:\users\direz\onedrive\documents\github\cs162_finalproject\vsproject\character.hpp(58): error C2027: use of undefined type 'Queue'
+  c:\users\direz\onedrive\documents\github\cs162_finalproject\vsproject\character.hpp(25): note: see declaration of 'Queue'
+c:\users\direz\onedrive\documents\github\cs162_finalproject\vsproject\character.hpp(59): error C2027: use of undefined type 'Queue'
+  c:\users\direz\onedrive\documents\github\cs162_finalproject\vsproject\character.hpp(25): note: see declaration of 'Queue'
   board.cpp
-c:\users\direz\onedrive\documents\github\cs162_finalproject\vsproject\menu.hpp(29): error C2065: 'Board': undeclared identifier
-c:\users\direz\onedrive\documents\github\cs162_finalproject\vsproject\menu.hpp(29): error C2059: syntax error: ','
-c:\users\direz\onedrive\documents\github\cs162_finalproject\vsproject\menu.hpp(31): error C2065: 'Board': undeclared identifier
-c:\users\direz\onedrive\documents\github\cs162_finalproject\vsproject\menu.hpp(31): error C2059: syntax error: ','
   character.cpp
   circularLinkedList.cpp
+c:\users\direz\onedrive\documents\github\cs162_finalproject\vsproject\character.hpp(58): error C2027: use of undefined type 'Queue'
+  c:\users\direz\onedrive\documents\github\cs162_finalproject\vsproject\character.hpp(25): note: see declaration of 'Queue'
+c:\users\direz\onedrive\documents\github\cs162_finalproject\vsproject\character.hpp(59): error C2027: use of undefined type 'Queue'
+  c:\users\direz\onedrive\documents\github\cs162_finalproject\vsproject\character.hpp(25): note: see declaration of 'Queue'
   main.cpp
-c:\users\direz\onedrive\documents\github\cs162_finalproject\vsproject\menu.hpp(29): error C2065: 'Board': undeclared identifier
-c:\users\direz\onedrive\documents\github\cs162_finalproject\vsproject\menu.hpp(29): error C2059: syntax error: ','
-c:\users\direz\onedrive\documents\github\cs162_finalproject\vsproject\menu.hpp(31): error C2065: 'Board': undeclared identifier
-c:\users\direz\onedrive\documents\github\cs162_finalproject\vsproject\menu.hpp(31): error C2059: syntax error: ','
 c:\users\direz\onedrive\documents\github\cs162_finalproject\vsproject\main.cpp(32): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-c:\users\direz\onedrive\documents\github\cs162_finalproject\vsproject\main.cpp(59): error C3861: 'turnMenu': identifier not found
   menu.cpp
-c:\users\direz\onedrive\documents\github\cs162_finalproject\vsproject\menu.cpp(223): error C2276: '!': illegal operation on bound member function expression
-c:\users\direz\onedrive\documents\github\cs162_finalproject\vsproject\menu.cpp(290): error C2664: 'void movePlayer(Board *,Trainer *)': cannot convert argument 2 from 'Character *' to 'Trainer *'
-  c:\users\direz\onedrive\documents\github\cs162_finalproject\vsproject\menu.cpp(290): note: Types pointed to are unrelated; conversion requires reinterpret_cast, C-style cast or function-style cast
   Generating Code...
+c:\users\direz\onedrive\documents\github\cs162_finalproject\vsproject\board.cpp(255): warning C4715: 'Board::rightSpaceCheck': not all control paths return a value
+c:\users\direz\onedrive\documents\github\cs162_finalproject\vsproject\board.cpp(346): warning C4715: 'Board::leftSpaceCheck': not all control paths return a value
+c:\users\direz\onedrive\documents\github\cs162_finalproject\vsproject\board.cpp(436): warning C4715: 'Board::upSpaceCheck': not all control paths return a value
+c:\users\direz\onedrive\documents\github\cs162_finalproject\vsproject\board.cpp(526): warning C4715: 'Board::downSpaceCheck': not all control paths return a value

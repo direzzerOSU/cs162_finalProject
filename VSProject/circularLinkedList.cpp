@@ -52,11 +52,15 @@ bool Queue::isEmpty() {
 
 // adds a new node to the back of the queue
 void Queue::addBack(Character* x) {
+
 	// queue is empty
-	if (head == nullptr) {
+	if (head == nullptr || head->val == nullptr) {
 		QueueNode* node = new QueueNode();
 		head = node;
 		head->val = x;
+
+		head->next = nullptr;
+		head->prev = nullptr;
 	}
 	
 	// queue is not empty
@@ -88,7 +92,8 @@ void Queue::addBack(Character* x) {
 			newNode->val = x;
 		}
 	}
-	
+	cout << endl;
+	print();
 }
 
 // returns the node in the front of the queue
@@ -128,13 +133,14 @@ Character* Queue::getCharacter(int position) {
 		cout << "List is empty..." << endl;
 	}
 
-	// if there's at least 1 node
-	else if (head != nullptr) {
-		counter++;
+	// return the first character in the lineup
+	if (counter == position) {
+		return node->val;
 	}
 
 	// if there is more than 1 node
 	while (node->next != head && node->next != nullptr) {
+		// verify the correct node is selected
 		if (node->next != head && node->next != nullptr) {
 			node = node->next;
 			counter++;
@@ -144,9 +150,16 @@ Character* Queue::getCharacter(int position) {
 			return node->val;
 		}
 	}
-	// catch a BUG
-	cout << "There isn't a character in the entered position..." << endl;
-	return nullptr;
+
+	// (catch the character if missed) verify a character will be returned
+	if (node->val != nullptr) {
+		return node->val;
+	}
+
+	// catch a bug
+	else {
+		cout << "[BUG] There isn't a character in the entered position..." << endl;
+	}
 }
 
 // returns the size of the queue
@@ -176,12 +189,30 @@ int Queue::size() {
 	return counter;
 }
 
+// print the type of each monster in the player's lineup
+void Queue::print() {
+	QueueNode* node = head;
+
+	cout << "Lineup: " << endl;
+	cout << "     " << node->val->getType() << endl;
+
+	while (node->next != head && node->next != nullptr) {
+		if (node->next != head && node->next != nullptr) {
+			node = node->next;
+			cout << "     " << node->val->getType() << endl;
+		}
+	}
+	cout << endl;
+}
+
 //###########################################################################
 // item queue (circular linked list)
 
 // default constructor of an (item) queue for the player's backpack
 itemQueue::itemQueue() {
 	head = new itemNode();
+	head->next = nullptr;
+	head->prev = nullptr;
 }
 
 // default destructor of an (item) queue for the player's backpack
