@@ -38,12 +38,9 @@ public:
 	std::string getType();
 	int roll(int, int);
 	int getSpeed();
-	void addLineup(Character*);
+	int getArmor();
 	virtual void printStats() = 0;
-	void createLineup();
  protected:
-	Queue* lineup = nullptr;	// list of pokemon that the trainer has
-	Queue* backpack = nullptr;	
 	std::string charType = "";
 	int attack = 0;
 	int defense = 0;
@@ -59,11 +56,14 @@ class Trainer : public Character {
 	 // default constructor to initialize a trainer (with a lineup of pokemon)
 	 Trainer() : Character() {
 		 charType = "Trainer";
-		 //selectLineup();
+		 selectLineup();
+		 createBackpack();
 	 }
 	 ~Trainer();
+	 void createLineup();
 	 void selectLineup();
 	 bool emptyLineup();
+	 void createBackpack();
 	 //bool emptyBackpack();
 	 int attacking();
 	 void defending(int);
@@ -72,8 +72,11 @@ class Trainer : public Character {
 	 Character* getMonster(int);
 	 Character* getMonsterPrompt();
 	 int getLineupQty();
- private: 
+	 void addLineup(Character*);
+ private:
 	 int numMonsters = 3;
+	 Queue* lineup = nullptr;	// list of pokemon that the trainer has
+	 itemQueue* backpack = nullptr;
 };
 
 // derived class for the pokemon, Sparty, class

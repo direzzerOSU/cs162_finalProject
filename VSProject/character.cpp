@@ -36,21 +36,16 @@ int Character::getSpeed() {
 	return static_cast<int>(x);
 }
 
+// returns the number of armor points (for defense)
+int Character::getArmor() {
+	return armor;
+}
+
 // returns the type of pokemon/character type
 std::string Character::getType() {
 	return charType;
 }
 
-// adds a monster to the player's lineup
-void Character::addLineup(Character* x) {
-	lineup->addBack(x);
-}
-
-// initialize lineup within the player
-void Character::createLineup() {
-	lineup = new Queue();
-	backpack = new Queue();
-}
 
 //#########################################
 //  Trainer (Character) member functions  #
@@ -62,6 +57,12 @@ Trainer::~Trainer() {
 		delete lineup->getFront();
 		lineup->removeFront();
 	}
+}
+
+// initialize lineup within the player
+void Trainer::createLineup() {
+	lineup = new Queue();
+	//backpack = new Queue();
 }
 
 // menu for the user to select all of his/her pokemon (until the lineup is full)
@@ -132,6 +133,11 @@ bool Trainer::emptyLineup() {
 	return lineup->isEmpty();
 }
 
+// initializes & creates a backpack for the player's items
+void Trainer::createBackpack() {
+	backpack = new Backpack();
+}
+
 // attack function (should do nothing)
 int Trainer::attacking() {
 	int x = 0;
@@ -172,6 +178,7 @@ Character* Trainer::getMonsterPrompt() {
 	cout << endl << "Lineup: " << endl;
 	for (int n = 0; n < lineup->size(); n++) {
 		cout << "	" << n + 1 << ". " << lineup->getCharacter(n)->getType() << endl;
+		cout << "		Remaining Health: " << lineup->getCharacter(n)->getHealth() << endl;
 	}
 	cout << endl;
 
@@ -193,6 +200,12 @@ Character* Trainer::getMonsterPrompt() {
 // returns the size of the player's lineup
 int Trainer::getLineupQty() {
 	return lineup->size();
+}
+
+
+// adds a monster to the player's lineup
+void Trainer::addLineup(Character* x) {
+	lineup->addBack(x);
 }
 
 

@@ -10,6 +10,8 @@
 #define INPUTVALIDATION_H
 
 // include the files that are required for the input validation function to run properly
+#include "character.hpp"
+
 #include<iostream>
 using std::cout;
 using std::cin;
@@ -25,15 +27,12 @@ using std::endl;
 // validate the user's input is the correct type (i.e., int and char, respectively)
 void intValidation(int&);
 void charValidation(char&);
-void charValidationOnly(char&);
 void floatValidation(float& value);
 
 // check for a valid yes or no selection from user input
 void validYesNo(char&);
 
-// validate the user's input is a correct menu option (tailored to the OSU IMS, Lab4, assignment)
-void validMMChoice(char&);
-void validBldgChoice(char& value);
-void validTypeChoice(char& value);
+// validate the user's input is a correct menu option
+void validMonsterSelection(Character*, int&);
 
 #endif   // end of include guard

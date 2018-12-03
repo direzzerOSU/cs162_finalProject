@@ -32,4 +32,5 @@ void instructions(bool&);
 void movePlayer(Board*, Character*);
 void yesOrNo(int&);
 void turnMenu(Board*, Character*, bool&);
+void monsterMenu(Character*);
 #endif

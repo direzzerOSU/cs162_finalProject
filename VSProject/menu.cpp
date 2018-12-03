@@ -409,7 +409,7 @@ void turnMenu(Board* b, Character* c, bool& gameStatus) {
 
 	// view lineup of monsters
 	else if (x == 2) {
-		// TODO
+		monsterMenu(c);
 	}
 
 	// view backpack items
@@ -420,5 +420,52 @@ void turnMenu(Board* b, Character* c, bool& gameStatus) {
 	// quit the current game
 	else if (x == 4) {
 		gameStatus = false;
+	}
+}
+
+// menu for the player to navigate, including contents of:
+//      view monsters in player's lineup, monsters' attributes, etc.
+void monsterMenu(Character* player) {
+	cout << "Your lineup contains the following characters: " << endl;
+	
+	// loop through each monster in the player's lineup
+	for (int k = 0; k < static_cast<Trainer*>(player)->getLineupQty(); k++) {
+		cout << "	" << k + 1 << ". " << static_cast<Trainer*>(player)->getMonster(k)->getType() << endl;
+		cout << "		Health: " << static_cast<Trainer*>(player)->getMonster(k)->getHealth() << endl;
+		cout << "		Speed: " << static_cast<Trainer*>(player)->getMonster(k)->getSpeed() << endl;
+		cout << "		Health: " << static_cast<Trainer*>(player)->getMonster(k)->getArmor() << endl;
+	}
+
+	// ask what the person would like to do
+	cout << endl << "What 'action' would you like to do with the monster? (Select the monster's corresponding integer)" << endl;
+	cout << "	1. Use item" << endl;
+
+	// acquire user input (select the monster)
+	int monster = -10;
+	cout << "Monster Selection: ";
+	cin >> monster;
+	intValidation(monster);
+
+	// verify the input is legal
+	validMonsterSelection(player, monster);
+
+	// acquire user input (for what to do with a monster in the lineup
+	int action = -10;
+	cin >> action;
+	intValidation(action);
+
+	// verify the input is legal based on available menu
+	while (action != 1) {
+		cout << "Whoops! That's not a legal menu option... Please try again..." << endl;
+		cout << "Action Selection: ";
+		cin >> action;
+		intValidation(action);
+	}
+
+	// use items
+	if (action == 1) {
+		// TODO
+
+		// use item on the selection monster ("monster")
 	}
 }

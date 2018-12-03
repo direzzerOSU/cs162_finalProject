@@ -1,20 +1,14 @@
-﻿  backpack.cpp
-c:\users\direz\onedrive\documents\github\cs162_finalproject\vsproject\character.hpp(58): error C2027: use of undefined type 'Queue'
-  c:\users\direz\onedrive\documents\github\cs162_finalproject\vsproject\character.hpp(25): note: see declaration of 'Queue'
-c:\users\direz\onedrive\documents\github\cs162_finalproject\vsproject\character.hpp(59): error C2027: use of undefined type 'Queue'
-  c:\users\direz\onedrive\documents\github\cs162_finalproject\vsproject\character.hpp(25): note: see declaration of 'Queue'
-  board.cpp
+﻿  board.cpp
   character.cpp
-  circularLinkedList.cpp
-c:\users\direz\onedrive\documents\github\cs162_finalproject\vsproject\character.hpp(58): error C2027: use of undefined type 'Queue'
-  c:\users\direz\onedrive\documents\github\cs162_finalproject\vsproject\character.hpp(25): note: see declaration of 'Queue'
-c:\users\direz\onedrive\documents\github\cs162_finalproject\vsproject\character.hpp(59): error C2027: use of undefined type 'Queue'
-  c:\users\direz\onedrive\documents\github\cs162_finalproject\vsproject\character.hpp(25): note: see declaration of 'Queue'
+  inputValidation.cpp
   main.cpp
 c:\users\direz\onedrive\documents\github\cs162_finalproject\vsproject\main.cpp(32): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
   menu.cpp
   Generating Code...
-c:\users\direz\onedrive\documents\github\cs162_finalproject\vsproject\board.cpp(255): warning C4715: 'Board::rightSpaceCheck': not all control paths return a value
-c:\users\direz\onedrive\documents\github\cs162_finalproject\vsproject\board.cpp(346): warning C4715: 'Board::leftSpaceCheck': not all control paths return a value
-c:\users\direz\onedrive\documents\github\cs162_finalproject\vsproject\board.cpp(436): warning C4715: 'Board::upSpaceCheck': not all control paths return a value
-c:\users\direz\onedrive\documents\github\cs162_finalproject\vsproject\board.cpp(526): warning C4715: 'Board::downSpaceCheck': not all control paths return a value
+c:\users\direz\onedrive\documents\github\cs162_finalproject\vsproject\board.cpp(257): warning C4715: 'Board::rightSpaceCheck': not all control paths return a value
+c:\users\direz\onedrive\documents\github\cs162_finalproject\vsproject\board.cpp(348): warning C4715: 'Board::leftSpaceCheck': not all control paths return a value
+c:\users\direz\onedrive\documents\github\cs162_finalproject\vsproject\board.cpp(438): warning C4715: 'Board::upSpaceCheck': not all control paths return a value
+c:\users\direz\onedrive\documents\github\cs162_finalproject\vsproject\board.cpp(528): warning C4715: 'Board::downSpaceCheck': not all control paths return a value
+  backpack.obj : /DEBUG:FASTLINK is not supported when managed code is present; restarting link with /DEBUG:FULL
+  backpack.obj : MSIL module encountered; incremental linking is disabled for MSIL; performing full link
+  finalProject.vcxproj -> C:\Users\direz\OneDrive\Documents\GitHub\cs162_finalProject\VSProject\Debug\finalProject.exe

@@ -89,6 +89,32 @@ void Board::fight(Character* player, Character* monster) {
 
 				if (monster->getHealth() > 0) {
 					friendly->defending(monster->attacking());
+
+					if (friendly->getHealth() <= 0) {
+						cout << "Uh oh! Your monster died... Please choose another to continue combat..." << endl;
+						cout << "You may also run from the opponent monster..." << endl;
+
+						int yesNo = -10;
+						cout << "Do you want to run?" << endl;
+						cout << "	1. Yes" << endl;
+						cout << "	2. No" << endl;
+
+						cout << endl << "Run?: ";
+						cin >> yesNo;
+
+						// verify a proper option was chosen
+						yesOrNo(yesNo);
+
+						// player runs
+						if (yesNo == 1) {
+							break;
+						}
+
+						// player doesn't run; select a new monster to replace dead monster
+						else if (yesNo == 2) {
+							friendly = static_cast<Trainer*>(player)->getMonsterPrompt();
+						}
+					}
 				}
 
 				else {
@@ -102,6 +128,10 @@ void Board::fight(Character* player, Character* monster) {
 
 				if (friendly->getHealth() > 0) {
 					monster->defending(friendly->attacking());
+
+					if (monster->getHealth() <= 0) {
+						cout << "Congratulations! The monster is defeated!" << endl;
+					}
 				}
 
 				else {
@@ -110,6 +140,13 @@ void Board::fight(Character* player, Character* monster) {
 
 					int yesNo = -10;
 					cout << "Do you want to run?" << endl;
+					cout << "	1. Yes" << endl;
+					cout << "	2. No" << endl;
+
+					cout << endl << "Run?: ";
+					cin >> yesNo;
+
+					// verify a proper option was chosen
 					yesOrNo(yesNo);
 
 					// player runs
@@ -117,9 +154,9 @@ void Board::fight(Character* player, Character* monster) {
 						break;
 					}
 
-					// player doesn't run
+					// player doesn't run; select a new monster to replace dead monster
 					else if (yesNo == 2) {
-						// do nothing and continue through the loops to re-select a new lineup monster
+						friendly = static_cast<Trainer*>(player)->getMonsterPrompt();
 					}
 				}
 			}

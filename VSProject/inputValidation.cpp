@@ -30,41 +30,12 @@ void charValidation(char& value) {
    }
 }
 
-//// prompts the user to re-enter the intended attribute's value (for a char value); 
-//// however, makes sure that the entire line of text is captured (doesn't
-//// trigger loops looking for 'f'
-//void charValidationLine(char& value) {
-//   std::string s;
-//   while(cin.fail()){
-//      cin.clear();
-//      cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');    
-//      cout << "You have entered the wrong type of input. \n   Please enter a character: ";
-////      cin >> value;
-//      getline(cin, s, '\n');
-//      cout << endl;
-//   }
-//   value = s[0];
-//}
-
 // prompts the user to re-enter the intended attribute's value (for an int value)
 void floatValidation(float& value) {
    while(cin.fail()){
       cin.clear();
       cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');    
       cout << "You have entered the wrong type of input. \n   Please enter a float: ";
-      cin >> value;
-      cout << endl;
-   }
-}
-
-// validMMChoice = "Valid Main Menu Choice"
-//    this function is tailored to the OSU IMS (Oregon State University Information Management System)
-//    evaluates the user's input to make sure that a char was entered & ensures the char is a valid menu option
-void validMMChoice(char& value) {
-   while(cin.fail() || (tolower(value) != 'a' && tolower(value) != 'b' && tolower(value) != 'c' && tolower(value) != 'd' && tolower(value) != 'e' && tolower(value) != 'f')) {
-      cin.clear();
-      cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');    
-      cout << "You did not select a valid menu option...\n  Please enter a valid menu option: ";
       cin >> value;
       cout << endl;
    }
@@ -82,24 +53,12 @@ void validYesNo(char& value) {
    }
 }
 
-// verify one of the three (building) attributes is chosen
-void validBldgChoice(char& value) {
-   while(cin.fail() || (tolower(value) != 'a' && tolower(value) != 'b' && tolower(value) != 'c' && tolower(value) != 'd')) {
-      cin.clear();
-      cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); 
-      cout << "You did not select a valid option for editing an attribute...\n  Please enter a valid option: ";
-      cin >> value;
-      cout << endl;
-   }
-}
-
-// verify one of the two (people: instructor/student) attributes is chosen
-void validTypeChoice(char& value) {
-   while(cin.fail() || (tolower(value) != 'a' && tolower(value) != 'b')) {
-      cin.clear();
-      cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); 
-      cout << "You did not select a valid option...\n  Please enter a valid option: ";
-      cin >> value;
-      cout << endl;
-   }
+// ensure that the user's input is a valid menu selection based on the player's lineup
+void validMonsterSelection(Character* c, int& choice) {
+	while (choice > static_cast<Trainer*>(c)->getLineupQty() || choice <= 0) {
+		cout << "Whoops! You didn't select a valid monster... Please try again..." << endl;
+		cout << "Selection: ";
+		cin >> choice;
+		intValidation(choice);
+	}
 }

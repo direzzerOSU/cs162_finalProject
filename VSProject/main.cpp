@@ -41,8 +41,6 @@ int main() {
 		// initialize the board & trainer (player)
 		Board* board = new Board();
 		Character* player = new Trainer();
-		player->createLineup();
-		static_cast<Trainer*>(player)->selectLineup();
 
 		// place enemy pokemon on the board
 		board->placeItems();
