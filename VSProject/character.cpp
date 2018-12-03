@@ -135,7 +135,7 @@ bool Trainer::emptyLineup() {
 
 // initializes & creates a backpack for the player's items
 void Trainer::createBackpack() {
-	backpack = new Backpack();
+	backpack = new itemQueue();
 }
 
 // attack function (should do nothing)

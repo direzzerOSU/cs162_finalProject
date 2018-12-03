@@ -85,9 +85,12 @@ void Board::fight(Character* player, Character* monster) {
 
 			// player's monster attacks first
 			if (friendly->getSpeed() >= monster->getSpeed()) {
+				cout << "Your monster attacks the enemy monster!" << endl << endl;
 				monster->defending(friendly->attacking());
 
 				if (monster->getHealth() > 0) {
+					cout << endl << "------------------" << endl;
+					cout << "Your monster defends the enemy monster's attack!" << endl << endl;
 					friendly->defending(monster->attacking());
 
 					if (friendly->getHealth() <= 0) {

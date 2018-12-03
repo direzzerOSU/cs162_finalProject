@@ -12,6 +12,7 @@
 Queue::Queue(Character* value) {
 	head->val = value;
 }
+
 // default destructor for queue (circular linked list)
 Queue::~Queue() {
 
@@ -218,4 +219,34 @@ itemQueue::itemQueue() {
 // default destructor of an (item) queue for the player's backpack
 itemQueue::~itemQueue() {
 
+}
+
+// returns true if the user has the key, which is used to access
+// the final 'boss', in the player's backpack
+bool itemQueue::hasMagicLamp() {
+	if (head != nullptr) {
+		itemNode* node = head;
+
+		// the first backpack item is the magic lamp
+		if (node->val->description == "Magic Lamp") {
+			return true;
+		}
+
+		else {
+			// loop through the backpack's items
+			while (node->next != nullptr && node->next != head) {
+				// verify the node's update is legal
+				if (node->next != nullptr && node->next != head) {
+					node = node->next;
+				}
+
+				// check to see if the backpack's item is the magic lamp
+				if (node->val->description == "Magic Lamp") {
+					return true;
+				}				
+			}
+		}
+	}
+	// magic lamp is not in the player's backpack
+	return false;
 }

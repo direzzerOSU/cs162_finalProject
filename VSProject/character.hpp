@@ -42,6 +42,7 @@ public:
 	virtual void printStats() = 0;
  protected:
 	std::string charType = "";
+	std::string name = "";
 	int attack = 0;
 	int defense = 0;
 	int armor = 0;

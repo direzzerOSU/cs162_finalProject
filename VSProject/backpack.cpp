@@ -9,13 +9,13 @@
 #include "backpack.hpp"
 #include "circularLinkedList.hpp"
 
-// default constructor of the backpack
-Backpack::Backpack() {
-	items = new itemQueue();
-}
-
-// default destructor of the backpack
-Backpack::~Backpack() {
-	delete items;
-}
+//// default constructor of the backpack
+//Backpack::Backpack() {
+//	items = new itemQueue();
+//}
+//
+//// default destructor of the backpack
+//Backpack::~Backpack() {
+//	delete items;
+//}
 

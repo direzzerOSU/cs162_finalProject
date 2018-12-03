@@ -24,7 +24,6 @@ class Character;
 class Queue;
 struct QueueNode;
 struct Item;
-class Backpack;
 struct itemNode;
 class itemQueue;
 class Trainer;
@@ -62,8 +61,8 @@ class Queue {
 
 // defines a node within the below class (linked list)
 struct itemNode {
-	QueueNode* next = nullptr;
-	QueueNode* prev = nullptr;
+	itemNode* next = nullptr;
+	itemNode* prev = nullptr;
 	Item* val = nullptr;
 };
 
@@ -72,6 +71,7 @@ class itemQueue {
 public:
 	itemQueue();
 	~itemQueue();
+	bool hasMagicLamp();
 	//bool isEmpty();
 	//void addBack(Item*);
 	//Item* getFront();

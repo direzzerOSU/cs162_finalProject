@@ -432,8 +432,8 @@ void monsterMenu(Character* player) {
 	for (int k = 0; k < static_cast<Trainer*>(player)->getLineupQty(); k++) {
 		cout << "	" << k + 1 << ". " << static_cast<Trainer*>(player)->getMonster(k)->getType() << endl;
 		cout << "		Health: " << static_cast<Trainer*>(player)->getMonster(k)->getHealth() << endl;
-		cout << "		Speed: " << static_cast<Trainer*>(player)->getMonster(k)->getSpeed() << endl;
-		cout << "		Health: " << static_cast<Trainer*>(player)->getMonster(k)->getArmor() << endl;
+		cout << "		Speed:  " << static_cast<Trainer*>(player)->getMonster(k)->getSpeed() << endl;
+		cout << "		Armor:  " << static_cast<Trainer*>(player)->getMonster(k)->getArmor() << endl;
 	}
 
 	// ask what the person would like to do
