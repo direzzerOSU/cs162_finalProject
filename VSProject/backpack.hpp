@@ -66,7 +66,7 @@ struct attackPotion : Item {
 };
 
 // defense increase potion
-struct helmet : Item {
+struct armor : Item {
 	std::string description = "Shield";
 	std::string stat = "Armor";
 	int armor = 20;
@@ -128,6 +128,7 @@ public:
 	Item* getItem(int);
 	int size();
 	void print();
+	void itemDrop();
 
 	// item specific member functions
 	void useItem(Character*, Item*);

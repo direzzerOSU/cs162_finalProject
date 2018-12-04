@@ -436,14 +436,14 @@ void itemQueue::print()
 {
 	// lineup is empty
 	if (head == nullptr || head->val == nullptr) {
-		cout << "Lineup is empty..." << endl;
+		cout << "Backpack is empty..." << endl;
 	}
 
 	// lineup is NOT empty
 	else {
 		itemNode* node = head;
 
-		cout << "Lineup: " << endl;
+		cout << "Backpack: " << endl;
 		cout << "     " << node->val->description << endl;
 
 		// loop through each monster in the player's lineup

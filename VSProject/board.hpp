@@ -19,6 +19,8 @@ using std::endl;
 #include<string>
 using std::string;
 
+class Character;
+
 class Board {
  public:
 	 Board();

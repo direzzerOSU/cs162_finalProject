@@ -11,6 +11,9 @@
 
 #include "circularLinkedList.hpp"
 #include "backpack.hpp"
+#include "inputValidation.hpp"
+#include "circularLinkedList.hpp"
+#include "menu.hpp"
 
 #include<queue>
 #include<iostream>
@@ -66,11 +69,14 @@ class Trainer : public Character {
 		 createBackpack();
 	 }
 	 ~Trainer();
+	 void gameOver();
+	 bool getGameStatus();
 
 	 // combat
 	 int attacking();
 	 void defending(int);
 	 void printStats();
+	 bool fightBoss();
 
 	 // manage monster lineup
 	 void createLineup();
@@ -88,11 +94,14 @@ class Trainer : public Character {
 	 void viewBackpack();
 	 bool emptyBackpack();
 	 void useItemPrompt();
+	 void useItemMonster(Character*);
 	 void addItem(Item*);
+	 void randomItem();
  private:
 	 int numMonsters = 3;
 	 Queue* lineup = nullptr;	// list of pokemon that the trainer has
 	 Backpack* backpack = nullptr;
+	 bool gameStatus = true;	// true = active; false = game over / ends
 };
 
 // derived class for the pokemon, Sparty, class
@@ -171,4 +180,17 @@ public:
 private:
 };
 
+// Queen Kitty
+class QueenKitty : public Character
+{
+ public:
+	 QueenKitty() : Character()
+	 {
+		 charType = "Queen Kitty";
+		 health = 200;
+		 armor = 30;
+		 speed = 15;
+	 }
+ private:
+}; 
 #endif

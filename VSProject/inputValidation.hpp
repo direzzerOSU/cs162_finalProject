@@ -19,6 +19,8 @@ using std::endl;
 #include<string>
 #include<limits>
 
+class Character;
+
 // works cited
    // (1) http://www.cplusplus.com/reference/istream/istream/ignore/
 
@@ -30,7 +32,7 @@ void charValidation(char&);
 void floatValidation(float& value);
 
 // check for a valid yes or no selection from user input
-void validYesNo(char&);
+void validYesNo(int&);
 
 // validate the user's input is a correct menu option
 void validMonsterSelection(Character*, int&);

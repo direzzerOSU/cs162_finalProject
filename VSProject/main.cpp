@@ -48,15 +48,14 @@ int main() {
 		// place the trainer on the board
 		board->placeTrainer(player);
 
-		bool gameplay = true;
-
 		// standard gameplay
-		while (gameplay) {
+		while (static_cast<Trainer*>(player)->getGameStatus()) {
 			// print the current board
 			board->print();
 			cout << endl;
 
-			turnMenu(board, player, gameplay);
+			turnMenu(board, player);
+
 			cout << endl;
 		}
 

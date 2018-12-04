@@ -31,6 +31,6 @@ void mainMenuReturn(bool&);
 void instructions(bool&);
 void movePlayer(Board*, Character*);
 void yesOrNo(int&);
-void turnMenu(Board*, Character*, bool&);
+void turnMenu(Board*, Character*);
 void monsterMenu(Character*);
 #endif

@@ -50,6 +50,7 @@ void yesOrNo(int& x) {
 	cout << "	2. No" << endl;
 
 	// acquire user input
+	cout << "Selection: ";
 	cin >> x;
 	intValidation(x);
 
@@ -181,8 +182,6 @@ void mainMenuReturn(bool& status) {
 
 // menu for the player to move his/her player within the board
 void movePlayer(Board* b, Character* c) {
-	//Trainer* c;
-	//c = t;
 
 	// menu choices
 	cout << "Where would you like to move?" << endl;
@@ -376,10 +375,13 @@ void movePlayer(Board* b, Character* c) {
 	else {
 		cout << endl << "[ERROR] void movePlayer()" << endl << endl;
 	}
+
+	// 50% chance to find an item
+	static_cast<Trainer*>(c)->randomItem();
 }
 
 // player menu that appears at the start of each turn
-void turnMenu(Board* b, Character* c, bool& gameStatus) {
+void turnMenu(Board* b, Character* c) {
 	cout << "What would you like to do? Please use the menu to move and manage your character..." << endl;
 
 	// display menu
@@ -419,7 +421,7 @@ void turnMenu(Board* b, Character* c, bool& gameStatus) {
 
 	// quit the current game
 	else if (x == 4) {
-		gameStatus = false;
+		static_cast<Trainer*>(c)->gameOver();
 	}
 }
 
@@ -435,10 +437,7 @@ void monsterMenu(Character* player) {
 		cout << "		Speed:  " << static_cast<Trainer*>(player)->getMonster(k)->getSpeed() << endl;
 		cout << "		Armor:  " << static_cast<Trainer*>(player)->getMonster(k)->getArmor() << endl;
 	}
-
-	// ask what the person would like to do
-	cout << endl << "What 'action' would you like to do with the monster? (Select the monster's corresponding integer)" << endl;
-	cout << "	1. Use item" << endl;
+	cout << "Select 9 if you'd like to return to the main menu..." << endl;
 
 	// acquire user input (select the monster)
 	int monster = -10;
@@ -446,26 +445,34 @@ void monsterMenu(Character* player) {
 	cin >> monster;
 	intValidation(monster);
 
-	// verify the input is legal
-	validMonsterSelection(player, monster);
+	if (monster != 9)
+	{
+		// verify the input is legal
+		validMonsterSelection(player, monster);
 
-	// acquire user input (for what to do with a monster in the lineup
-	int action = -10;
-	cin >> action;
-	intValidation(action);
+		// ask what the person would like to do
+		cout << endl << "What 'action' would you like to do with the monster? (Select the monster's corresponding integer)" << endl;
+		cout << "	1. Use item" << endl;
+		cout << "	2. Return to menu" << endl;
 
-	// verify the input is legal based on available menu
-	while (action != 1) {
-		cout << "Whoops! That's not a legal menu option... Please try again..." << endl;
-		cout << "Action Selection: ";
+		// acquire user input (for what to do with a monster in the lineup)
+		int action = -10;
+		cout << "What to do with monster?: ";
 		cin >> action;
 		intValidation(action);
-	}
 
-	// use items
-	if (action == 1) {
-		// TODO
+		// verify the input is legal based on available menu
+		while (action != 1) {
+			cout << "Whoops! That's not a legal menu option... Please try again..." << endl;
+			cout << "Action Selection: ";
+			cin >> action;
+			intValidation(action);
+		}
 
-		// use item on the selection monster ("monster")
+		// use items
+		if (action == 1) {
+			// use item on the selection monster ("monster")
+			static_cast<Trainer*>(player)->useItemMonster(static_cast<Trainer*>(player)->getMonster(monster));
+		}
 	}
 }

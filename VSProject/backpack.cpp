@@ -8,6 +8,8 @@
 
 #include "backpack.hpp"
 #include "circularLinkedList.hpp"
+#include "menu.hpp"
+#include "inputValidation.hpp"
 
 // default constructor of the backpack
 Backpack::Backpack() {
@@ -74,22 +76,100 @@ void Backpack::print()
 	items->print();
 }
 
+// random chance for an item to drop
+void Backpack::itemDrop()
+{
+	// 50% chance that a random item drops
+	if (rand() % 2 == 1)
+	{
+		int val = (rand() % 100) + 1;
+
+		// add magic lamp
+		if (val <= 20) 
+		{
+			MagicLamp* x = new MagicLamp();
+			cout << "After your player moves, your player finds an item hidden in the dirt..." << endl;
+			cout << endl << "You have found a " << x->description << "!" << endl;
+			addBack(x);
+		}
+
+		// add megaHealing Potion
+		else if (val <= 30)
+		{
+			megaHealingPotion* x = new megaHealingPotion();
+			cout << "After your player moves, your player finds an item hidden in the dirt..." << endl;
+			cout << endl << "You have found a " << x->description << "!" << endl;
+			addBack(x);
+		}
+
+		// add minorHealing Potion
+		else if (val <= 40)
+		{
+			minorHealingPotion* x = new minorHealingPotion();
+			cout << "After your player moves, your player finds an item hidden in the dirt..." << endl;
+			cout << endl << "You have found a " << x->description << "!" << endl;
+			addBack(x);
+		}
+
+		// add attack Potion
+		else if (val <= 50)
+		{
+			attackPotion* x = new attackPotion();
+			cout << "After your player moves, your player finds an item hidden in the dirt..." << endl;
+			cout << endl << "You have found a " << x->description << "!" << endl;
+			addBack(x);
+		}
+
+		// add armor
+		else if (val <= 60)
+		{
+			armor* x = new armor();
+			cout << "After your player moves, your player finds an item hidden in the dirt..." << endl;
+			cout << endl << "You have found a " << x->description << "!" << endl;
+			addBack(x);
+		}
+
+		// add attack poison
+		else if (val <= 70)
+		{
+			attackPoison* x = new attackPoison();
+			cout << "After your player moves, your player finds an item hidden in the dirt..." << endl;
+			cout << endl << "You have found a " << x->description << "!" << endl;
+			addBack(x);
+		}
+
+		// add defense poison
+		else if (val <= 80)
+		{
+			defensePoison* x = new defensePoison();
+			cout << "After your player moves, your player finds an item hidden in the dirt..." << endl;
+			cout << endl << "You have found a " << x->description << "!" << endl;
+			addBack(x);
+		}
+
+		// add speed potion
+		else if (val <= 90)
+		{
+			speedPotion* x = new speedPotion();
+			cout << "After your player moves, your player finds an item hidden in the dirt..." << endl;
+			cout << endl << "You have found a " << x->description << "!" << endl;
+			addBack(x);
+		}
+
+		// add speed poison
+		else if (val <= 100)
+		{
+			speedPoison* x = new speedPoison();
+			cout << "After your player moves, your player finds an item hidden in the dirt..." << endl;
+			cout << endl << "You have found a " << x->description << "!" << endl;
+			addBack(x);
+		}
+	}
+}
+
 // use an item in the player's backpack
 void Backpack::useItem(Character* friendly, Item* item)
 {
-	// use a magic lamp
-	if (item->description == "Magic Lamp") {
-		cout << "You rub the magic lamp, hoping something will happen..." << endl;
-		cout << "The next thing your character knows, he is standing in front of the evil boss..." << endl;
-
-		cout << endl << "You must use your monsters to fight against the evil boss, whose name is, Queen Kitty!" << endl;
-
-		// begin combat against Queen Kitty
-	}
-
 	// use a potion / poison
-	else {
-		//friendly->
-	}
-
+	friendly->updateStat(item);
 }

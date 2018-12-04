@@ -43,13 +43,13 @@ void floatValidation(float& value) {
 
 // validYesNo = "Valid Yes or No selection"
 //    evaluates the user's input to make sure that a char was entered & ensures the char is either a Y or N (for yes and no, respectively)
-void validYesNo(char& value) {
-   while(cin.fail() || (tolower(value) != 'y' && tolower(value) != 'n')) {
+void validYesNo(int& value) {
+   while(cin.fail() || (value != 1 && value != 2)) {
       cin.clear();
       cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');    
       cout << "You did not select a valid option...\n  Please enter a valid option: ";
       cin >> value;
-      cout << endl;
+	  intValidation(value);
    }
 }
 
