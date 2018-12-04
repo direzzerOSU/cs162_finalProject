@@ -71,10 +71,11 @@ void Board::print() {
 
 // executes a fight between the player and a (sole) monster (on the board)
 void Board::fight(Character* player, Character* monster) {
+	bool fightOver = false;
 	cout << endl << "----------------------------------------" << endl << endl;
 
 	// fights until either all player's monsters die or the opponent monster dies
-	while (static_cast<Trainer*>(player)->emptyLineup() == false && monster->getHealth() > 0) {
+	while ((static_cast<Trainer*>(player)->emptyLineup() == false && monster->getHealth() > 0) && fightOver == false) {
 		// get player's monster
 		Character* friendly = static_cast<Trainer*>(player)->getMonsterPrompt();
 
@@ -106,10 +107,11 @@ void Board::fight(Character* player, Character* monster) {
 						cin >> yesNo;
 
 						// verify a proper option was chosen
-						yesOrNo(yesNo);
+						validYesNo(yesNo);
 
 						// player runs
 						if (yesNo == 1) {
+							fightOver = true;
 							break;
 						}
 
@@ -145,6 +147,7 @@ void Board::fight(Character* player, Character* monster) {
 				friendly->defending(monster->attacking());
 
 				if (friendly->getHealth() > 0) {
+					cout << endl << "------------------" << endl << endl;
 					monster->defending(friendly->attacking());
 
 					if (monster->getHealth() <= 0) {
@@ -165,10 +168,129 @@ void Board::fight(Character* player, Character* monster) {
 					cin >> yesNo;
 
 					// verify a proper option was chosen
-					yesOrNo(yesNo);
+					validYesNo(yesNo);
 
 					// player runs
 					if (yesNo == 1) {
+						fightOver = true;
+						break;
+					}
+
+					// player doesn't run; select a new monster to replace dead monster
+					else if (yesNo == 2) {
+						friendly = static_cast<Trainer*>(player)->getMonsterPrompt();
+					}
+				}
+			}
+			cout << endl << "----------------------------------------" << endl << endl;
+		}
+	}
+}
+
+// executes a fight between the player and a (sole) monster (on the board)
+void Board::fightWithResult(Character* player, Character* monster, bool& runFromFight) {
+	runFromFight = false;
+	cout << endl << "----------------------------------------" << endl << endl;
+
+	// fights until either all player's monsters die or the opponent monster dies
+	while ((static_cast<Trainer*>(player)->emptyLineup() == false && monster->getHealth() > 0) && runFromFight == false) {
+		// get player's monster
+		Character* friendly = static_cast<Trainer*>(player)->getMonsterPrompt();
+
+		// rounds of combat until one monster dies
+		while (friendly->getHealth() > 0 && monster->getHealth() > 0) {
+
+			// determine who fights first based on speed
+
+			// player's monster attacks first
+			if (friendly->getSpeed() >= monster->getSpeed()) {
+				cout << "Your monster attacks the enemy monster!" << endl << endl;
+				monster->defending(friendly->attacking());
+
+				if (monster->getHealth() > 0) {
+					cout << endl << "------------------" << endl;
+					cout << "Your monster defends the enemy monster's attack!" << endl << endl;
+					friendly->defending(monster->attacking());
+
+					if (friendly->getHealth() <= 0) {
+						cout << "Uh oh! Your monster died... Please choose another to continue combat..." << endl;
+						cout << "You may also run from the opponent monster..." << endl;
+
+						int yesNo = -10;
+						cout << "Do you want to run?" << endl;
+						cout << "	1. Yes" << endl;
+						cout << "	2. No" << endl;
+
+						cout << endl << "Run?: ";
+						cin >> yesNo;
+
+						// verify a proper option was chosen
+						validYesNo(yesNo);
+
+						// player runs
+						if (yesNo == 1) {
+							runFromFight = true;
+							break;
+						}
+
+						// player doesn't run; select a new monster to replace dead monster
+						else if (yesNo == 2) {
+							friendly = static_cast<Trainer*>(player)->getMonsterPrompt();
+						}
+					}
+				}
+
+				else {
+					cout << "Congratulations! The monster is defeated!" << endl;
+
+					// chance to 'drop' a magic lamp (1/3 chance)
+					if ((rand() % 3) == 1) {
+
+						// add a magic lamp to the player's inventory
+						cout << endl << "Wait... Something drops from the enemy monster..." << endl;
+						cout << "You step closer to see what it is... And you reach for the object..." << endl;
+
+						cout << endl << "Congratulations! You just found the Magic Lamp!" << endl;
+						cout << "Use the Magic Lamp to find the evil boss..." << endl;
+
+						// add the Magic Lamp to the player's inventory
+						Item* magicLamp = new MagicLamp();
+						static_cast<Trainer*>(player)->addItem(magicLamp);
+					}
+				}
+			}
+
+			// opponent monster attacks first
+			else if (monster->getSpeed() > friendly->getSpeed()) {
+				friendly->defending(monster->attacking());
+
+				if (friendly->getHealth() > 0) {
+					cout << endl << "------------------" << endl << endl;
+					monster->defending(friendly->attacking());
+
+					if (monster->getHealth() <= 0) {
+						cout << "Congratulations! The monster is defeated!" << endl;
+					}
+				}
+
+				else {
+					cout << "Uh oh! Your monster died... Please choose another to continue combat..." << endl;
+					cout << "You may also run from the opponent monster..." << endl;
+
+					int yesNo = -10;
+					cout << "Do you want to run?" << endl;
+					cout << "	1. Yes" << endl;
+					cout << "	2. No" << endl;
+
+					cout << endl << "Run?: ";
+					cin >> yesNo;
+
+					// verify a proper option was chosen
+					validYesNo(yesNo);
+
+					// player runs
+					if (yesNo == 1) {
+						runFromFight = true;
 						break;
 					}
 

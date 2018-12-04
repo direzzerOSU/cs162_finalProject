@@ -231,6 +231,7 @@ itemQueue::itemQueue() {
 	head = new itemNode();
 	head->next = nullptr;
 	head->prev = nullptr;
+	head->val = nullptr;
 }
 
 // default destructor of an (item) queue for the player's backpack
@@ -313,21 +314,31 @@ void itemQueue::addBack(Item* item) {
 
 	// backpack is NOT empty
 	else {
-		itemNode* node = head;
-
-		// find the back of the list
-		while (node->next != head && node->next != nullptr) {
-			// verify it's 'legal' to step again
-			if (node->next != head && node->next != nullptr) {
-				node = node->next;
-			}
+		// backpack is empty, but head is not null
+		if (head->val == nullptr)
+		{
+			head->val = item;
 		}
 
-		// add the new item to the back of the itemQueue
-		itemNode* newNode = new itemNode();
-		node->next = newNode;
-		head->prev = newNode;
-		newNode->val = item;
+		// there is more than 1 item in the backpack
+		else
+		{
+			itemNode* node = head;
+
+			// find the back of the list
+			while (node->next != head && node->next != nullptr) {
+				// verify it's 'legal' to step again
+				if (node->next != head && node->next != nullptr) {
+					node = node->next;
+				}
+			}
+
+			// add the new item to the back of the itemQueue
+			itemNode* newNode = new itemNode();
+			node->next = newNode;
+			head->prev = newNode;
+			newNode->val = item;
+		}
 	}
 }
 
@@ -434,6 +445,8 @@ int itemQueue::size()
 // print items in the player's backpack
 void itemQueue::print()
 {
+	cout << "Printing..." << endl;
+
 	// lineup is empty
 	if (head == nullptr || head->val == nullptr) {
 		cout << "Backpack is empty..." << endl;
@@ -441,6 +454,8 @@ void itemQueue::print()
 
 	// lineup is NOT empty
 	else {
+		cout << "Backpack is not empty..." << endl;
+
 		itemNode* node = head;
 
 		cout << "Backpack: " << endl;

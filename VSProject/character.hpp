@@ -188,9 +188,13 @@ class QueenKitty : public Character
 	 {
 		 charType = "Queen Kitty";
 		 health = 200;
-		 armor = 30;
+		 armor = 0;
 		 speed = 15;
 	 }
+	 ~QueenKitty() {};
+	 int attacking();
+	 void defending(int);
+	 void printStats();
  private:
 }; 
 #endif

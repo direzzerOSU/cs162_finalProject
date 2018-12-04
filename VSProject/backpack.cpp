@@ -123,7 +123,7 @@ void Backpack::itemDrop()
 		// add armor
 		else if (val <= 60)
 		{
-			armor* x = new armor();
+			helmet* x = new helmet();
 			cout << "After your player moves, your player finds an item hidden in the dirt..." << endl;
 			cout << endl << "You have found a " << x->description << "!" << endl;
 			addBack(x);

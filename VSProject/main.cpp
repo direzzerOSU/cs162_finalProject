@@ -32,15 +32,39 @@ int main() {
 	std::srand(std::time(0));		// initialize the program's seed for rand()
 
 	bool status = true;
-	introMenu(status);		// start/quit the program
 
 	// loop while the game is still active
 	while (status) {
-		cout << "Game board:" << endl << endl;
+		cout << endl;
+		introMenu(status);		// start/quit the program
+
+		// catch a break if the user wants to quit
+		if (status == false) 
+		{
+			break;
+		}
 
 		// initialize the board & trainer (player)
 		Board* board = new Board();
 		Character* player = new Trainer();
+
+		cout << "Test1" << endl;
+		Item* x = new MagicLamp();
+		cout << "Test2" << endl;
+		static_cast<Trainer*>(player)->addItem(x);
+		cout << "Test3" << endl;
+		// verify the user is ready to begin the game before starting...
+		cout << endl << "Are you ready to begin gameplay?" << endl;
+		int input = -10;
+		yesOrNo(input);
+
+		// loop until the player is ready to begin
+		while (input != 1) {
+			cout << endl << "Are you ready to begin gameplay now?" << endl;
+			yesOrNo(input);
+			validYesNo(input);
+			cout << endl;
+		}
 
 		// place enemy pokemon on the board
 		board->placeItems();

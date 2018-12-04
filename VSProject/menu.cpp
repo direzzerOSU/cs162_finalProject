@@ -12,7 +12,7 @@
 // game introduction menu
 void introMenu(bool& status) {
    // introduction
-   string program_name = "Pokemon Hunting Game";
+   string program_name = "Queen Kitty Hunting Game";
    cout << "Hello! Welcome to the " << program_name << "!" << endl << endl;
    
    cout << "What would you like to do?" << endl;
@@ -65,16 +65,16 @@ void yesOrNo(int& x) {
 // gameplay instructions before beginning gameplay
 void instructions(bool& status) {
 	// instructions
-	cout << "Welcome to the Pokemon Hunting Game!" << endl << endl;
-	cout << "Objective: Catch the Queen Kitty pokemon" << endl;
-	cout << "	       Fight wild pokemon to collect items & gold" << endl;
-	cout << "	       Use gold to purchase items" << endl;
+	cout << "Welcome to the Monster Hunting Game!" << endl << endl;
+	cout << "Objective: Defeat the Queen Kitty Monster (Final Boss)" << endl;
+	cout << "	   Fight wild monsters to collect items" << endl;
 
 	// prompt to begin the game
-	cout << "Are you ready to begin the game?" << endl;
+	cout << endl << "Are you ready to begin the game?" << endl;
 	cout << "	1. Yes" << endl;
 	cout << "	2. No" << endl;
 	int input = 9;
+	cout << endl << "Selection: ";
 	cin >> input;
 	intValidation(input);
 
@@ -88,7 +88,7 @@ void instructions(bool& status) {
 
 	// start the game
 	if (input == 1) {
-		cout << "Starting game..." << endl;
+		cout << endl << "Starting game..." << endl;
 		status = true;
 	}
 
@@ -174,10 +174,11 @@ void mainMenuReturn(bool& status) {
          
          // do nothing and let the program run back through the 'while loop'
          else if(tolower(option) == 2) {
-            //option = 'n'
+			 //option = 5;
          }
       }
    }
+   cout << endl;
 }
 
 // menu for the player to move his/her player within the board
@@ -204,6 +205,9 @@ void movePlayer(Board* b, Character* c) {
 		intValidation(selection);
 	}
 
+	// helps determine whether the char can move on the game board
+	bool runFromFight;
+
 	// move up
 	if (selection == 1) {
 		// if the space is occupied
@@ -219,10 +223,11 @@ void movePlayer(Board* b, Character* c) {
 			if (selection == 1) {
 				// fight the monster
 				Character* m = b->upMonster(c);
-				b->fight(c, m);
+				b->fightWithResult(c, m, runFromFight);
 
 				// if monster is defeated, remove monster from the board
-				if (!static_cast<Trainer*>(c)->emptyLineup()) {					
+				if (!static_cast<Trainer*>(c)->emptyLineup() && runFromFight == false) {
+					delete m;
 					b->moveUp(c);
 				}
 				// if player is defeated
@@ -233,6 +238,7 @@ void movePlayer(Board* b, Character* c) {
 
 			// do not fight the monster
 			else if (selection == 2) {
+				cout << endl << "You decide to leave the enemy monster alone..." << endl;
 				// let the function end & return to the round/turn menu to re-select a new move or something else
 			}
 			
@@ -264,7 +270,8 @@ void movePlayer(Board* b, Character* c) {
 				b->fight(c, m);
 
 				// if monster is defeated, remove monster from the board
-				if (!static_cast<Trainer*>(c)->emptyLineup()) {
+				if (!static_cast<Trainer*>(c)->emptyLineup() && runFromFight == false) {
+					delete m;
 					b->moveRight(c);
 				}
 				// if player is defeated
@@ -306,7 +313,8 @@ void movePlayer(Board* b, Character* c) {
 				b->fight(c, m);
 
 				// if monster is defeated, remove monster from the board
-				if (!static_cast<Trainer*>(c)->emptyLineup()) {
+				if (!static_cast<Trainer*>(c)->emptyLineup() && runFromFight == false) {
+					delete m;
 					b->moveDown(c);
 				}
 				// if player is defeated
@@ -348,7 +356,8 @@ void movePlayer(Board* b, Character* c) {
 				b->fight(c, m);
 
 				// if monster is defeated, remove monster from the board
-				if (!static_cast<Trainer*>(c)->emptyLineup()) {
+				if (!static_cast<Trainer*>(c)->emptyLineup() && runFromFight == false) {
+					delete m;
 					b->moveLeft(c);
 				}
 				// if player is defeated
@@ -403,6 +412,7 @@ void turnMenu(Board* b, Character* c) {
 		cin >> x;
 		intValidation(x);
 	}
+	cout << endl;
 
 	// move player
 	if (x == 1) {
@@ -416,12 +426,20 @@ void turnMenu(Board* b, Character* c) {
 
 	// view backpack items
 	else if (x == 3) {
-		static_cast<Trainer*>(c)->viewBackpack();
+		static_cast<Trainer*>(c)->useItemPrompt();
 	}
 
 	// quit the current game
 	else if (x == 4) {
-		static_cast<Trainer*>(c)->gameOver();
+		cout << "Are you sure you want to quit the game?" << endl << endl;
+		int input = -10;
+		yesOrNo(input);
+		validYesNo(input);
+
+		// quit the game after verifying with the user
+		if (input == 1) {
+			static_cast<Trainer*>(c)->gameOver();
+		}
 	}
 }
 
@@ -437,11 +455,12 @@ void monsterMenu(Character* player) {
 		cout << "		Speed:  " << static_cast<Trainer*>(player)->getMonster(k)->getSpeed() << endl;
 		cout << "		Armor:  " << static_cast<Trainer*>(player)->getMonster(k)->getArmor() << endl;
 	}
-	cout << "Select 9 if you'd like to return to the main menu..." << endl;
+	cout << endl << "Please select a monster from your lineup..." << endl;
+	cout << "Or please select 9 if you'd like to return to the main menu..." << endl;
 
 	// acquire user input (select the monster)
 	int monster = -10;
-	cout << "Monster Selection: ";
+	cout << endl << "Monster Selection: ";
 	cin >> monster;
 	intValidation(monster);
 
@@ -462,7 +481,7 @@ void monsterMenu(Character* player) {
 		intValidation(action);
 
 		// verify the input is legal based on available menu
-		while (action != 1) {
+		while (action != 1 && action != 2) {
 			cout << "Whoops! That's not a legal menu option... Please try again..." << endl;
 			cout << "Action Selection: ";
 			cin >> action;
@@ -472,7 +491,16 @@ void monsterMenu(Character* player) {
 		// use items
 		if (action == 1) {
 			// use item on the selection monster ("monster")
-			static_cast<Trainer*>(player)->useItemMonster(static_cast<Trainer*>(player)->getMonster(monster));
+			if (!static_cast<Trainer*>(player)->emptyBackpack())
+			{
+				static_cast<Trainer*>(player)->useItemMonster(static_cast<Trainer*>(player)->getMonster(monster));
+			}
+
+			// backpack is empty
+			else
+			{
+				cout << "Your backpack is empty..." << endl;
+			}
 		}
 	}
 }
