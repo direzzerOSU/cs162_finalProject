@@ -414,7 +414,7 @@ void turnMenu(Board* b, Character* c, bool& gameStatus) {
 
 	// view backpack items
 	else if (x == 3) {
-		// TODO
+		static_cast<Trainer*>(c)->viewBackpack();
 	}
 
 	// quit the current game

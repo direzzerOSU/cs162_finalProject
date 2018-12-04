@@ -10,6 +10,7 @@
 #define CHARACTER_H
 
 #include "circularLinkedList.hpp"
+#include "backpack.hpp"
 
 #include<queue>
 #include<iostream>
@@ -22,10 +23,12 @@ using std::string;
 using std::vector;
 
 // forward declaration of class
-class Queue;
-struct QueueNode;
 class itemQueue;
 struct itemNode;
+struct Item;
+class Backpack;
+class Queue;
+struct QueueNode;
 
 // base class for different characters within the game
 class Character {
@@ -36,6 +39,7 @@ public:
 	virtual void defending(int) = 0;
 	int getHealth();
 	std::string getType();
+	void updateStat(Item*);
 	int roll(int, int);
 	int getSpeed();
 	int getArmor();
@@ -44,6 +48,7 @@ public:
 	std::string charType = "";
 	std::string name = "";
 	int attack = 0;
+	int attackBonus = 0;
 	int defense = 0;
 	int armor = 0;
 	int health = 0;
@@ -61,23 +66,33 @@ class Trainer : public Character {
 		 createBackpack();
 	 }
 	 ~Trainer();
-	 void createLineup();
-	 void selectLineup();
-	 bool emptyLineup();
-	 void createBackpack();
-	 //bool emptyBackpack();
+
+	 // combat
 	 int attacking();
 	 void defending(int);
 	 void printStats();
+
+	 // manage monster lineup
+	 void createLineup();
+	 void selectLineup();
+	 void viewLineup();
 	 Character* getFrontMonster();
 	 Character* getMonster(int);
 	 Character* getMonsterPrompt();
 	 int getLineupQty();
 	 void addLineup(Character*);
+	 bool emptyLineup();
+
+	 // manage backpack of items
+	 void createBackpack();
+	 void viewBackpack();
+	 bool emptyBackpack();
+	 void useItemPrompt();
+	 void addItem(Item*);
  private:
 	 int numMonsters = 3;
 	 Queue* lineup = nullptr;	// list of pokemon that the trainer has
-	 itemQueue* backpack = nullptr;
+	 Backpack* backpack = nullptr;
 };
 
 // derived class for the pokemon, Sparty, class

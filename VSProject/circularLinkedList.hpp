@@ -72,13 +72,13 @@ public:
 	itemQueue();
 	~itemQueue();
 	bool hasMagicLamp();
-	//bool isEmpty();
-	//void addBack(Item*);
-	//Item* getFront();
-	//void removeFront();
-	//Item* getCharacter(int);
-	//int size();
-	//void print();
+	bool isEmpty();
+	void addBack(Item*);
+	Item* getFront();
+	void removeFront();
+	Item* getItem(int);
+	int size();
+	void print();
 	//void reversePrint();
 private:
 	itemNode* head = nullptr;

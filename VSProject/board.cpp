@@ -122,6 +122,21 @@ void Board::fight(Character* player, Character* monster) {
 
 				else {
 					cout << "Congratulations! The monster is defeated!" << endl;
+					
+					// chance to 'drop' a magic lamp (1/3 chance)
+					if ((rand() % 3) == 1) {
+
+						// add a magic lamp to the player's inventory
+						cout << endl << "Wait... Something drops from the enemy monster..." << endl;
+						cout << "You step closer to see what it is... And you reach for the object..." << endl;
+
+						cout << endl << "Congratulations! You just found the Magic Lamp!" << endl;
+						cout << "Use the Magic Lamp to find the evil boss..." << endl;
+						
+						// add the Magic Lamp to the player's inventory
+						Item* magicLamp = new MagicLamp();
+						static_cast<Trainer*>(player)->addItem(magicLamp);
+					}
 				}
 			}
 

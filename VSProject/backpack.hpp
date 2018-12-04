@@ -10,15 +10,25 @@
 #define BACKPACK_H
 
 #include "circularLinkedList.hpp"
+#include "character.hpp"
+#include<string>
+using std::string;
+#include<iostream>
+using std::cout;
+using std::cin;
+using std::endl;
 
 class itemQueue;
 struct itemNode;
 struct Item;
-//class Backpack;
+class Backpack;
+class Character;
 
 // (base class) define items that the player can use (& are stored within the backpack)
 struct Item {
+	// general
 	std::string description;
+	std::string stat;
 
 	// attributes
 	int health;
@@ -37,37 +47,59 @@ struct Item {
 // full health potion (restores full health)
 struct megaHealingPotion : Item {
 	std::string description = "Mega Healing Potion";
+	std::string stat = "Health";
 	int health = 100;
 };
 
 // minor health potion
 struct minorHealingPotion : Item {
 	std::string description = "Minor Healing Potion";
+	std::string stat = "Health";
 	int health = 20;
 };
 
 // attack increase potion
 struct attackPotion : Item {
 	std::string description = "Attack Potion";
+	std::string stat = "Attack";
 	int attack = 20;
 };
 
 // defense increase potion
-struct defensePotion : Item {
-	std::string description = "Defense Potion";
-	int defense = 20;
+struct helmet : Item {
+	std::string description = "Shield";
+	std::string stat = "Armor";
+	int armor = 20;
 };
 
 // attack (decrease) poison
-struct attackPoision : Item {
+struct attackPoison : Item {
 	std::string description = "Attack Poison";
+	std::string stat = "Attack";
 	int attack = -20;
 };
 
 // defense (decrease) poison
 struct defensePoison : Item {
 	std::string description = "Defense Poison";
-	int defense = -20;
+	std::string stat = "Armor";
+	int armor = -20;
+};
+
+// speed potion (increase)
+struct speedPotion : Item
+{
+	std::string description = "Speed Potion";
+	std::string stat = "Speed";
+	int speed = 20;
+};
+
+// speed potion (decrease)
+struct speedPoison : Item
+{
+	std::string description = "Speed Poison";
+	std::string stat = "Speed";
+	int speed = -20;
 };
 
 // magic lamp required to fight against the boss
@@ -75,16 +107,31 @@ struct MagicLamp : Item {
 	std::string description = "Magic Lamp";
 };
 
+
 //######################################################
 // backpack (of items)
 
-//// define backpack (as a class)
-//class Backpack {
-//public:
-//	Backpack();
-//	~Backpack();
-//	//void view();
-//private:
-//	itemQueue* items = nullptr;
-//};
+// define backpack (as a class)
+class Backpack {
+public:
+	// default constructor & desctructor
+	Backpack();
+	~Backpack();
+
+	// backpack member functions, utilizing itemQueue member functions
+	bool emptyBackpack();
+	bool hasMagicLamp();
+	bool isEmpty();
+	void addBack(Item*);
+	Item* getFront();
+	void removeFront();
+	Item* getItem(int);
+	int size();
+	void print();
+
+	// item specific member functions
+	void useItem(Character*, Item*);
+private:
+	itemQueue* items = nullptr;
+};
 #endif

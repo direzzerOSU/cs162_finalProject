@@ -46,6 +46,34 @@ std::string Character::getType() {
 	return charType;
 }
 
+// updates the character's (monster's) stat(s) based on an item (potion/poison)
+void Character::updateStat(Item* item)
+{
+	// health related item
+	if (item->stat == "Health")
+	{
+		health += item->health;
+	}
+
+	// attack related item
+	else if (item->stat == "Attack")
+	{
+		attackBonus = item->attack;
+	}
+
+	// defense related item
+	else if (item->stat == "Armor")
+	{
+		armor += item->armor;
+	}
+
+	// catch others
+	else
+	{
+		// do nothing
+	}
+}
+
 
 //#########################################
 //  Trainer (Character) member functions  #
@@ -128,6 +156,12 @@ void Trainer::selectLineup() {
 	}
 }
 
+// prints the player's lineup of monsters (by type)
+void Trainer::viewLineup()
+{
+	lineup->print();
+}
+
 // checks to see if the player's lineup is empty
 bool Trainer::emptyLineup() {
 	return lineup->isEmpty();
@@ -135,7 +169,78 @@ bool Trainer::emptyLineup() {
 
 // initializes & creates a backpack for the player's items
 void Trainer::createBackpack() {
-	backpack = new itemQueue();
+	backpack = new Backpack();
+}
+
+void Trainer::viewBackpack()
+{
+	backpack->print();
+}
+
+// returns true if the backpack is empty
+bool Trainer::emptyBackpack()
+{
+	return backpack->isEmpty();
+}
+
+// uses an item in the player's backpack
+void Trainer::useItemPrompt()
+{
+	cout << "You open up your backpack and examine all your items..." << endl;
+
+	// list all items in the player's backpack
+	cout << endl << "Items in backpack:" << endl;
+	for (int k = 0; k < backpack->size(); k++) {
+		cout << "	" << k+1 << ") " << backpack->getItem(k)->description << endl;
+	}
+
+	// user chooses an item to use
+	cout << "What item would you like to use? (Input the item's corresponding number)" << endl;
+	int selection = -10;
+	cout << "Selection: ";
+	cin >> selection;
+	intValidation(selection);
+
+	// ensure the choice is valid
+	while (selection > backpack->size()) {
+		cout << "Whoops! That's not a valid choice... Please try again..." << endl;
+		cout << "Selection: ";
+		cin >> selection;
+		intValidation(selection);
+	}
+
+	// select a monster to use the item on
+	if (backpack->getItem(selection - 1)->description != "Magic Lamp") 
+	{
+		// print player's lineup
+		cout << "What monster (in your lineup) would you like to use the item on?" << endl << endl;
+		lineup->print();
+
+		// use item & update the player's monster's stats
+		int monster = -10;
+		cout << "Please choose the monster that you'd like to use your item on..." << endl;
+		cout << "Selection: ";
+		cin >> monster;
+		intValidation(monster);
+
+		// ensure a valid option is chosen
+		while (monster > lineup->size())
+		{
+			cout << "Whoops! You didn't choose a valid option... Please try again..." << endl;
+			cout << "Selection: ";
+			cin >> monster;
+			intValidation(monster);
+		}
+	}
+
+	// use the magic lamp
+
+}
+
+// adds an item to the player's backpack
+void Trainer::addItem(Item* item)
+{
+	backpack->addBack(item);
 }
 
 // attack function (should do nothing)

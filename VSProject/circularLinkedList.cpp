@@ -99,6 +99,12 @@ void Queue::addBack(Character* x) {
 
 // returns the node in the front of the queue
 Character* Queue::getFront() {
+	// if the list is empty
+	if (head == nullptr || head->val == nullptr) {
+		cout << "The lineup is empty..." << endl;
+		return nullptr;
+	}
+
 	return head->val;
 }
 
@@ -191,20 +197,31 @@ int Queue::size() {
 }
 
 // print the type of each monster in the player's lineup
-void Queue::print() {
-	QueueNode* node = head;
+void Queue::print()
+{
+	// lineup is empty
+	if (head == nullptr || head->val == nullptr) {
+		cout << "Lineup is empty..." << endl;
+	}
 
-	cout << "Lineup: " << endl;
-	cout << "     " << node->val->getType() << endl;
+	// lineup is NOT empty
+	else {
+		QueueNode* node = head;
 
-	while (node->next != head && node->next != nullptr) {
-		if (node->next != head && node->next != nullptr) {
-			node = node->next;
-			cout << "     " << node->val->getType() << endl;
+		cout << "Lineup: " << endl;
+		cout << "     " << node->val->getType() << endl;
+
+		// loop through each monster in the player's lineup
+		while (node->next != head && node->next != nullptr) {
+			if (node->next != head && node->next != nullptr) {
+				node = node->next;
+				cout << "     " << node->val->getType() << endl;
+			}
 		}
 	}
 	cout << endl;
 }
+
 
 //###########################################################################
 // item queue (circular linked list)
@@ -219,6 +236,29 @@ itemQueue::itemQueue() {
 // default destructor of an (item) queue for the player's backpack
 itemQueue::~itemQueue() {
 
+	// queue (circular linked list) contains 1 node (header)
+	if (head->next == nullptr && head->prev == nullptr) {
+		if (head != nullptr) {
+			delete head;
+		}
+	}
+
+	// queue (circular linked list) contains >1 node
+	else {
+		// verify there is at least one node in the queue (circular linked list)
+		if (head != nullptr) {
+			itemNode* node = head;
+			itemNode* nodeDelete = node;
+
+			// 'step' one node at a time through the queue (circular linked list) & free memory
+			while (node->next != nullptr && node->prev != nullptr && node->next != head && node->prev != head) {
+				node = node->next;
+				delete nodeDelete;
+				nodeDelete = node;
+			}
+			delete node;
+		}
+	}
 }
 
 // returns true if the user has the key, which is used to access
@@ -249,4 +289,170 @@ bool itemQueue::hasMagicLamp() {
 	}
 	// magic lamp is not in the player's backpack
 	return false;
+}
+
+// returns true if the player's backpack if empty (has no items)
+bool itemQueue::isEmpty() {
+	if (head == nullptr) {
+		return true;
+	}
+	else {
+		return false;
+	}
+}
+
+// adds a new item to the player's backpack
+void itemQueue::addBack(Item* item) {
+
+	// if backpack is empty
+	if (head == nullptr) {
+		itemNode* newNode = new itemNode();
+		head = newNode;
+		head->val = item;
+	}
+
+	// backpack is NOT empty
+	else {
+		itemNode* node = head;
+
+		// find the back of the list
+		while (node->next != head && node->next != nullptr) {
+			// verify it's 'legal' to step again
+			if (node->next != head && node->next != nullptr) {
+				node = node->next;
+			}
+		}
+
+		// add the new item to the back of the itemQueue
+		itemNode* newNode = new itemNode();
+		node->next = newNode;
+		head->prev = newNode;
+		newNode->val = item;
+	}
+}
+
+// returns the first item in the player's backpack (queue/list)
+Item* itemQueue::getFront() {
+	// if the list is empty
+	if (head == nullptr || head->val == nullptr) {
+		cout << "The lineup is empty..." << endl;
+		return nullptr;
+	}
+
+	return head->val;
+}
+
+// removes the first item from the player's backpack (or the queue/list)
+void itemQueue::removeFront() {
+	// list is empty
+	if (head == nullptr) {
+		// do nothing
+	}
+
+	// list has 1 node
+	else if (head != nullptr && head->next == nullptr && head->prev == nullptr) {
+		delete head;
+		head = nullptr;
+	}
+
+	// list is longer than 1 node
+	else {
+		itemNode* temp = head;
+		head->next->prev = head->prev;
+		head->prev->next = head->next;
+		head = head->next;
+		delete temp;
+	}
+}
+
+// returns a specific item from the player's backpack
+Item* itemQueue::getItem(int position) {
+	int counter = 0;
+	itemNode* node = head;
+
+	if (head == nullptr) {
+		cout << "List is empty..." << endl;
+	}
+
+	// return the first character in the lineup
+	if (counter == position) {
+		return node->val;
+	}
+
+	// if there is more than 1 node
+	while (node->next != head && node->next != nullptr) {
+		// verify the correct node is selected
+		if (node->next != head && node->next != nullptr) {
+			node = node->next;
+			counter++;
+		}
+		// return the character that was located at the specified position
+		if (counter == position) {
+			return node->val;
+		}
+	}
+
+	// (catch the character if missed) verify a character will be returned
+	if (node->val != nullptr) {
+		return node->val;
+	}
+
+	// catch a bug
+	else {
+		cout << "[BUG] There isn't a character in the entered position..." << endl;
+	}
+}
+
+// returns the size of the player's backpack (queue/list)
+int itemQueue::size()
+{
+	int counter = 0;
+
+	// if the queue is empty
+	if (head == nullptr) {
+		return counter;
+	}
+
+	// if the queue has at least 1 node
+	else if (head != nullptr) {
+		counter++;
+	}
+
+	itemNode* node = head;
+	// find the total count
+	while (node->next != head && node->next != nullptr) {
+		if (node->next != head && node->next != nullptr) {
+			node = node->next;
+			counter++;
+		}
+	}
+
+	// return the count
+	return counter;
+}
+
+// print items in the player's backpack
+void itemQueue::print()
+{
+	// lineup is empty
+	if (head == nullptr || head->val == nullptr) {
+		cout << "Lineup is empty..." << endl;
+	}
+
+	// lineup is NOT empty
+	else {
+		itemNode* node = head;
+
+		cout << "Lineup: " << endl;
+		cout << "     " << node->val->description << endl;
+
+		// loop through each monster in the player's lineup
+		while (node->next != head && node->next != nullptr) {
+			if (node->next != head && node->next != nullptr) {
+				node = node->next;
+				cout << "     " << node->val->description << endl;
+			}
+		}
+	}
+	cout << endl;
 }
