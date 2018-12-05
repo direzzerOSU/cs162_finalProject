@@ -20,17 +20,22 @@ using std::endl;
 using std::string;
 
 class Character;
+class Trainer;
 
 class Board {
  public:
 	 Board();
 	 ~Board();
+
 	 void print();
+
 	 void fight(Character*, Character*);
 	 void fightWithResult(Character*, Character*, bool&);
+
 	 void set(int, int, Character*);
 	 void placeTrainer(Character*);
 	 void placeItems();
+
 	 Character* rightMonster(Character*);
 	 bool rightSpaceCheck(Character*);
 	 bool moveRight(Character*);
@@ -46,5 +51,6 @@ class Board {
  private:
 	 Character*** board;
 	 int dimensions = 10;
+	 Trainer* player;
 }; 
 #endif

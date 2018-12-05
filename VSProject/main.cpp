@@ -48,11 +48,6 @@ int main() {
 		Board* board = new Board();
 		Character* player = new Trainer();
 
-		cout << "Test1" << endl;
-		Item* x = new MagicLamp();
-		cout << "Test2" << endl;
-		static_cast<Trainer*>(player)->addItem(x);
-		cout << "Test3" << endl;
 		// verify the user is ready to begin the game before starting...
 		cout << endl << "Are you ready to begin gameplay?" << endl;
 		int input = -10;
@@ -86,8 +81,17 @@ int main() {
 		// ask if the user wants to quit the current game & return to the main menu
 		mainMenuReturn(status);
 
-		delete board;
-		delete player;
+		// make sure the pointer isn't "double freed"
+		if (board != nullptr)
+		{
+			delete board;
+		}
+
+		// make sure the pointer isn't "double freed"
+		if (player != nullptr)
+		{
+			delete player;
+		}
 	}
 
 	return 0;

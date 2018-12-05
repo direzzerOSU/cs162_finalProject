@@ -37,6 +37,10 @@ bool Backpack::hasMagicLamp()
 // returns true if the player's backpack if empty (has no items)
 bool Backpack::isEmpty()
 {
+	if (items == nullptr) 
+	{
+		items = new itemQueue();
+	}
 	return items->isEmpty();
 }
 
@@ -67,7 +71,14 @@ Item* Backpack::getItem(int position)
 // returns the size of the player's backpack (queue/list)
 int Backpack::size()
 {
-	items->size();
+	if (items != nullptr)
+	{
+		items->size();
+	}
+	else
+	{
+		cout << "There are no items..." << endl;
+	}
 }
 
 // print items in the player's backpack
@@ -76,25 +87,16 @@ void Backpack::print()
 	items->print();
 }
 
-// random chance for an item to drop
+// random chance for an item to drop (when walking - not after combat)
 void Backpack::itemDrop()
 {
 	// 50% chance that a random item drops
 	if (rand() % 2 == 1)
 	{
-		int val = (rand() % 100) + 1;
-
-		// add magic lamp
-		if (val <= 20) 
-		{
-			MagicLamp* x = new MagicLamp();
-			cout << "After your player moves, your player finds an item hidden in the dirt..." << endl;
-			cout << endl << "You have found a " << x->description << "!" << endl;
-			addBack(x);
-		}
+		int val = (rand() % 80) + 1;
 
 		// add megaHealing Potion
-		else if (val <= 30)
+		if (val <= 10)
 		{
 			megaHealingPotion* x = new megaHealingPotion();
 			cout << "After your player moves, your player finds an item hidden in the dirt..." << endl;
@@ -103,7 +105,7 @@ void Backpack::itemDrop()
 		}
 
 		// add minorHealing Potion
-		else if (val <= 40)
+		else if (val <= 20)
 		{
 			minorHealingPotion* x = new minorHealingPotion();
 			cout << "After your player moves, your player finds an item hidden in the dirt..." << endl;
@@ -112,7 +114,7 @@ void Backpack::itemDrop()
 		}
 
 		// add attack Potion
-		else if (val <= 50)
+		else if (val <= 30)
 		{
 			attackPotion* x = new attackPotion();
 			cout << "After your player moves, your player finds an item hidden in the dirt..." << endl;
@@ -121,7 +123,7 @@ void Backpack::itemDrop()
 		}
 
 		// add armor
-		else if (val <= 60)
+		else if (val <= 40)
 		{
 			helmet* x = new helmet();
 			cout << "After your player moves, your player finds an item hidden in the dirt..." << endl;
@@ -130,7 +132,7 @@ void Backpack::itemDrop()
 		}
 
 		// add attack poison
-		else if (val <= 70)
+		else if (val <= 50)
 		{
 			attackPoison* x = new attackPoison();
 			cout << "After your player moves, your player finds an item hidden in the dirt..." << endl;
@@ -139,7 +141,7 @@ void Backpack::itemDrop()
 		}
 
 		// add defense poison
-		else if (val <= 80)
+		else if (val <= 60)
 		{
 			defensePoison* x = new defensePoison();
 			cout << "After your player moves, your player finds an item hidden in the dirt..." << endl;
@@ -148,7 +150,7 @@ void Backpack::itemDrop()
 		}
 
 		// add speed potion
-		else if (val <= 90)
+		else if (val <= 70)
 		{
 			speedPotion* x = new speedPotion();
 			cout << "After your player moves, your player finds an item hidden in the dirt..." << endl;
@@ -157,13 +159,22 @@ void Backpack::itemDrop()
 		}
 
 		// add speed poison
-		else if (val <= 100)
+		else if (val <= 80)
 		{
 			speedPoison* x = new speedPoison();
 			cout << "After your player moves, your player finds an item hidden in the dirt..." << endl;
 			cout << endl << "You have found a " << x->description << "!" << endl;
 			addBack(x);
 		}
+
+		//// add magic lamp
+		//else if (val <= 20)
+		//{
+		//	MagicLamp* x = new MagicLamp();
+		//	cout << "After your player moves, your player finds an item hidden in the dirt..." << endl;
+		//	cout << endl << "You have found a " << x->description << "!" << endl;
+		//	addBack(x);
+		//}
 	}
 }
 

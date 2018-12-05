@@ -148,11 +148,10 @@ void Character::updateStat(Item* item)
 //#########################################
 
 // default destructor of the Trainer inherited class
-Trainer::~Trainer() {
-	while (!lineup->isEmpty()) {
-		delete lineup->getFront();
-		lineup->removeFront();
-	}
+Trainer::~Trainer() 
+{
+	delete lineup;
+	delete backpack;
 }
 
 // ends the game
@@ -164,13 +163,28 @@ void Trainer::gameOver()
 // returns the current game status (true = active; false = over)
 bool Trainer::getGameStatus()
 {
+	// if player dies, then the game is over
+	if (health <= 0) 
+	{
+		cout << endl << "After your last step, you realize that you've been exposed to the toxic air for too long..." << endl;
+		cout << "You fall to the ground and suffocate to death from the toxic air..." << endl;
+		cout << endl << "Game over..." << endl << endl;
+		gameStatus = false;
+	}
 	return gameStatus;
+}
+
+// decreases the trainer's health with every step - the player must defeat the boss before
+// the player dies or else the player will lose
+void Trainer::drainHealth()
+{
+	cout << endl << endl << "Your health drains..." << endl << endl;
+	health -= 10;
 }
 
 // initialize lineup within the player
 void Trainer::createLineup() {
 	lineup = new Queue();
-	//backpack = new Queue();
 }
 
 // menu for the user to select all of his/her pokemon (until the lineup is full)
@@ -284,13 +298,15 @@ void Trainer::useItemPrompt()
 	cout << "You open up your backpack and examine all your items..." << endl;
 
 	// list all items in the player's backpack
-	cout << endl << "Items in backpack:" << endl;
-	for (int k = 0; k < backpack->size(); k++) {
-		cout << "	" << k+1 << ") " << backpack->getItem(k)->description << endl;
-	}
+	//cout << endl << "Items in backpack:" << endl;
+	//for (int k = 0; k < backpack->size(); k++) {
+	//	cout << "	" << k+1 << ") " << backpack->getItem(k)->description << endl;
+	//}
+	viewBackpack();
 
 	// user chooses an item to use
-	cout << "What item would you like to use? (Input the item's corresponding number)" << endl;
+	cout << endl << "What item would you like to use? (Input the item's corresponding number)" << endl;
+	cout << "Please input 0 if you would like to return to the game menu..." << endl;
 	int selection = -10;
 	cout << "Selection: ";
 	cin >> selection;
@@ -304,8 +320,14 @@ void Trainer::useItemPrompt()
 		intValidation(selection);
 	}
 
+	// return to the main menu
+	if (selection == 0)
+	{
+		// do nothing
+	}
+
 	// select a monster to use the item on
-	if (backpack->getItem(selection - 1)->description != "Magic Lamp") 
+	else if (backpack->getItem(selection - 1)->description != "Magic Lamp") 
 	{
 		// print player's lineup
 		cout << "What monster (in your lineup) would you like to use the item on?" << endl << endl;
@@ -332,7 +354,7 @@ void Trainer::useItemPrompt()
 	}
 
 	// magic lamp is chosen
-	else
+	else if (backpack->getItem(selection - 1)->description == "Magic Lamp")
 	{
 		cout << "You rub the magic lamp, hoping something will happen..." << endl;
 		cout << "The next thing your character knows, he is standing in front of the evil boss..." << endl;
@@ -369,8 +391,18 @@ void Trainer::useItemPrompt()
 				cout << "Oh no! You have been defeated!... Queen Kitty will continue to wreak havoc on humanity..." << endl;
 			}
 
-			gameOver();
+			// game over only if all of your monsters died
+			if (lineup->isEmpty())
+			{
+				gameOver();
+			}
 		}
+	}
+
+	// return to the game menu
+	else
+	{
+		// do nothing
 	}
 }
 
@@ -381,27 +413,84 @@ void Trainer::useItemMonster(Character* friendly)
 
 	// list all items in the player's backpack
 	cout << endl << "Items in backpack:" << endl;
-	for (int k = 0; k < backpack->size(); k++) {
-		cout << "	" << k + 1 << ") " << backpack->getItem(k)->description << endl;
-	}
+	//for (int k = 0; k < backpack->size(); k++) {
+	//	cout << "	" << k + 1 << ") " << backpack->getItem(k)->description << endl;
+	//}
+	viewBackpack();
 
 	// user chooses an item to use
 	cout << "What item would you like to use? (Input the item's corresponding number)" << endl;
+	cout << "Please input 0 if you would like to return to the game menu..." << endl;
 	int selection = -10;
 	cout << "Selection: ";
 	cin >> selection;
 	intValidation(selection);
 
-	// ensure the choice is valid
-	while (selection > backpack->size()) {
-		cout << "Whoops! That's not a valid choice... Please try again..." << endl;
-		cout << "Selection: ";
-		cin >> selection;
-		intValidation(selection);
+	// return to the main menu
+	if (selection == 0)
+	{
+		// do nothing
 	}
 
-	// use an item
-	backpack->useItem(friendly, backpack->getItem(selection));
+	// magic lamp
+	else if (backpack->getItem(selection - 1)->description == "Magic Lamp")
+	{
+		cout << "You rub the magic lamp, hoping something will happen..." << endl;
+		cout << "The next thing your character knows, he is standing in front of the evil boss..." << endl;
+
+		cout << endl << "You must use your monsters to fight against the evil boss, whose name is, Queen Kitty!" << endl;
+
+		cout << endl << "Are you ready to fight Queen Kitty?..." << endl;
+		int selection = -10;
+		yesOrNo(selection);
+		validYesNo(selection);
+
+		// do not begin the fight until the player is ready
+		while (selection != 1)
+		{
+			cout << endl << "Are you ready to fight Queen Kitty?" << endl;
+			yesOrNo(selection);
+			validYesNo(selection);
+		}
+
+		// begin combat against Queen Kitty
+		if (selection == 1)
+		{
+			bool result = fightBoss();
+
+			// celebrate the victory
+			if (result)
+			{
+				cout << "Congratulations! You won!... You defeated the evil Queen Kitty!" << endl;
+			}
+
+			// you lost
+			else if (!result)
+			{
+				cout << "Oh no! You have been defeated!... Queen Kitty will continue to wreak havoc on humanity..." << endl;
+			}
+
+			// game over only if all of your monsters died
+			if (lineup->isEmpty())
+			{
+				gameOver();
+			}
+		}
+	}
+
+	else
+	{
+		// ensure the choice is valid
+		while (selection > backpack->size()) {
+			cout << "Whoops! That's not a valid choice... Please try again..." << endl;
+			cout << "Selection: ";
+			cin >> selection;
+			intValidation(selection);
+		}
+
+		// use an item
+		backpack->useItem(friendly, backpack->getItem(selection));
+	}
 }
 
 // adds an item to the player's backpack
@@ -468,37 +557,50 @@ bool Trainer::fightBoss()
 					friendly->defending(monster->attacking());
 
 					if (friendly->getHealth() <= 0) {
-						cout << "Uh oh! Your monster died... Please choose another to continue combat..." << endl;
-						cout << endl << "You may also run from the opponent monster..." << endl;
+						// there is at least one monster with more than 0 health
+						if (!lineup->isEmpty()) {
+							cout << "Uh oh! Your monster died... Please choose another to continue combat..." << endl;
+							cout << endl << "You may also run from the opponent monster..." << endl;
 
-						int yesNo = -10;
-						cout << endl << "Do you want to run?" << endl;
+							int yesNo = -10;
+							cout << endl << "Do you want to run?" << endl;
 
-						// verify a proper option was chosen
-						yesOrNo(yesNo);
+							// verify a proper option was chosen
+							yesOrNo(yesNo);
 
-						// loop until a correct choice is made
-						while (yesNo != 1 && yesNo != 2)
+							// loop until a correct choice is made
+							while (yesNo != 1 && yesNo != 2)
+							{
+								validYesNo(yesNo);
+							}
+
+							// player runs
+							if (yesNo == 1) {
+								cout << endl << "You decide to run... Queen Kitty will continue to wreak havoc!" << endl;
+								status = false;
+								return false;
+							}
+
+							// player doesn't run; select a new monster to replace dead monster
+							else if (yesNo == 2) {
+								friendly = getMonsterPrompt();
+							}
+						}
+
+						// all your monsters died
+						else
 						{
-							validYesNo(yesNo);
-						}
-
-						// player runs
-						if (yesNo == 1) {
-							cout << endl << "You decide to run... Queen Kitty will continue to wreak havoc!" << endl;
-							status = false;
-							return false;
-						}
-
-						// player doesn't run; select a new monster to replace dead monster
-						else if (yesNo == 2) {
-							friendly = getMonsterPrompt();
+							cout << "Uh oh! Your monster died..." << endl;
+							cout << "With an empty lineup, you have failed..." << endl;
+							cout << endl << "You lose... Game over..." << endl << endl;
 						}
 					}
 				}
 				else {
 					cout << "Congratulations! You defeated Queen Kitty!" << endl;
 					status = false;
+					delete monster;
+					gameOver();
 					return true;
 				}
 			}
@@ -512,47 +614,75 @@ bool Trainer::fightBoss()
 					cout << "Your monster attacks the enemy monster!" << endl << endl;
 					monster->defending(friendly->attacking());
 
+					// queen kitty is dead
 					if (monster->getHealth() <= 0) {
+
+						// congratulatory note to the hero (winner)
 						cout << "Congratulations! You defeated Queen Kitty!" << endl;
+						cout << endl << "..." << endl;
+						cout << endl << "All of a sudden you feel a stong gust of wind and......" << endl;
+						cout << endl << "You snap back to consciousness!" << endl;
+						cout << endl << "You realize that you're back where you were before rubbing the Magic Lamp..." << endl;
+						
+						cout << endl << "Queen Kitty is now defeated, and you can now rest at peace knowing\n";
+						cout << "that she has been laid to rest for good..." << endl;
+						cout << "Excellent work, hero! Because of your fearsome lineup of monsters and your\n";
+						cout << "relentless determination, you have saved the world from Queen Kitty, who \n";
+						cout << "had put a shroud of darkness over the world for your lifetime..." << endl;
+
+						cout << endl << "Game over..." << endl << endl;
+						
 						status = false;
+						delete monster;
+						gameOver();
 						return true;
 					}
 				}
 
 				else {
-					cout << "Uh oh! Your monster died... Please choose another to continue combat..." << endl;
-					cout << endl << "You may also run from the opponent monster..." << endl;
+					// there is at least one monster with more than 0 health
+					if (!lineup->isEmpty()) {
+						cout << "Uh oh! Your monster died... Please choose another to continue combat..." << endl;
+						cout << endl << "You may also run from the opponent monster..." << endl;
 
-					int yesNo = -10;
-					cout << endl << "Do you want to run?" << endl;
-					cout << "	1. Yes" << endl;
-					cout << "	2. No" << endl;
+						int yesNo = -10;
+						cout << endl << "Do you want to run?" << endl;
+						cout << "	1. Yes" << endl;
+						cout << "	2. No" << endl;
 
-					cout << endl << "Run?: ";
-					cin >> yesNo;
+						cout << endl << "Run?: ";
+						cin >> yesNo;
 
-					// loop until a correct choice is made
-					while (yesNo != 1 && yesNo != 2)
+						// loop until a correct choice is made
+						while (yesNo != 1 && yesNo != 2)
+						{
+							validYesNo(yesNo);
+						}
+
+						// player runs
+						if (yesNo == 1) {
+							status = false;
+							return false;
+						}
+
+						// player doesn't run; select a new monster to replace dead monster
+						else if (yesNo == 2) {
+							friendly = getMonsterPrompt();
+						}
+					}
+
+					// all your monsters died
+					else
 					{
-						validYesNo(yesNo);
-					}
-
-					// player runs
-					if (yesNo == 1) {
-						status = false;
-						return false;
-					}
-
-					// player doesn't run; select a new monster to replace dead monster
-					else if (yesNo == 2) {
-						friendly = getMonsterPrompt();
+						cout << "Uh oh! Your monster died..." << endl;
+						cout << "With an empty lineup, you have failed..." << endl;
+						cout << endl << "You lose... Game over..." << endl << endl;
 					}
 				}
 			}
 			cout << endl << "----------------------------------------" << endl << endl;
 		}
 	}
-
 }
 
 // returns the first monster in the player's lineup (of monsters)
@@ -586,6 +716,8 @@ Character* Trainer::getMonsterPrompt() {
 
 	// ensure the user chose a valid option
 	while (selection > lineup->size()) {
+		cout << endl << "Whoops! You didn't choose a valid monster from your lineup... Please try again..." << endl;
+		cout << "Selection: ";
 		cin >> selection;
 		intValidation(selection);
 	}
@@ -598,7 +730,6 @@ Character* Trainer::getMonsterPrompt() {
 int Trainer::getLineupQty() {
 	return lineup->size();
 }
-
 
 // adds a monster to the player's lineup
 void Trainer::addLineup(Character* x) {
@@ -641,7 +772,7 @@ void Sparty::defending(int attacker) {
 	if (damage > 0) {
 		health -= damage;
 		cout << "Total Inflicted Damage: " << damage << endl;
-		cout << "Defender's Updated Strength: " << health << endl;
+		cout << "Defender's Updated Health: " << health << endl;
 
 		if (health <= 0) {
 			cout << endl << getType() << " has been defeated!" << endl;
@@ -650,7 +781,7 @@ void Sparty::defending(int attacker) {
 	else {
 		// do nothing - the char defended against the attack
 		cout << "Total Inflicted Damage: 0" << endl;
-		cout << "Defender's Updated Strength: " << health << endl;
+		cout << "Defender's Updated Health: " << health << endl;
 	}
 }
 
@@ -694,7 +825,7 @@ void Bieber::defending(int attacker) {
 	if (damage > 0) {
 		health -= damage;
 		cout << "Total Inflicted Damage: " << damage << endl;
-		cout << "Defender's Updated Strength: " << health << endl;
+		cout << "Defender's Updated Health: " << health << endl;
 
 		if (health <= 0) {
 			cout << endl << getType() << " has been defeated!" << endl;
@@ -703,7 +834,7 @@ void Bieber::defending(int attacker) {
 	else {
 		// do nothing - the char defended against the attack
 		cout << "Total Inflicted Damage: 0" << endl;
-		cout << "Defender's Updated Strength: " << health << endl;
+		cout << "Defender's Updated Health: " << health << endl;
 	}
 }
 
@@ -747,7 +878,7 @@ void Wonky::defending(int attacker) {
 	if (damage > 0) {
 		health -= damage;
 		cout << "Total Inflicted Damage: " << damage << endl;
-		cout << "Defender's Updated Strength: " << health << endl;
+		cout << "Defender's Updated Health: " << health << endl;
 
 		if (health <= 0) {
 			cout << endl << getType() << " has been defeated!" << endl;
@@ -756,7 +887,7 @@ void Wonky::defending(int attacker) {
 	else {
 		// do nothing - the char defended against the attack
 		cout << "Total Inflicted Damage: 0" << endl;
-		cout << "Defender's Updated Strength: " << health << endl;
+		cout << "Defender's Updated Health: " << health << endl;
 	}
 }
 
@@ -800,7 +931,7 @@ void HocusPocus::defending(int attacker) {
 	if (damage > 0) {
 		health -= damage;
 		cout << "Total Inflicted Damage: " << damage << endl;
-		cout << "Defender's Updated Strength: " << health << endl;
+		cout << "Defender's Updated Health: " << health << endl;
 
 		if (health <= 0) {
 			cout << endl << getType() << " has been defeated!" << endl;
@@ -809,7 +940,7 @@ void HocusPocus::defending(int attacker) {
 	else {
 		// do nothing - the char defended against the attack
 		cout << "Total Inflicted Damage: 0" << endl;
-		cout << "Defender's Updated Strength: " << health << endl;
+		cout << "Defender's Updated Health: " << health << endl;
 	}
 }
 
@@ -854,7 +985,7 @@ void QueenKitty::defending(int attacker)
 	if (damage > 0) {
 		health -= damage;
 		cout << "Total Inflicted Damage: " << damage << endl;
-		cout << "Defender's Updated Strength: " << health << endl;
+		cout << "Defender's Updated Health: " << health << endl;
 
 		if (health <= 0) {
 			cout << endl << getType() << " has been defeated!" << endl;
@@ -863,7 +994,7 @@ void QueenKitty::defending(int attacker)
 	else {
 		// do nothing - the char defended against the attack
 		cout << "Total Inflicted Damage: 0" << endl;
-		cout << "Defender's Updated Strength: " << health << endl;
+		cout << "Defender's Updated Health: " << health << endl;
 	}
 }
 

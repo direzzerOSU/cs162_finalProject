@@ -67,10 +67,15 @@ class Trainer : public Character {
 		 charType = "Trainer";
 		 selectLineup();
 		 createBackpack();
+		 health = 100;
 	 }
+	 // default destructor
 	 ~Trainer();
+
+	 // game management
 	 void gameOver();
 	 bool getGameStatus();
+	 void drainHealth();
 
 	 // combat
 	 int attacking();
@@ -112,8 +117,6 @@ class Sparty : public Character {
 		 charType = "Sparty (the Spartan)";
 		 health = 100;
 		 armor = 5;
-		 hasShield = false;		// Sparty pokemon start with no shield (by default)
-		 shield = 0;			// no shield = no additional defense points
 		 speed = 3;
 		 weapons = 1;
 	 }
@@ -122,8 +125,6 @@ class Sparty : public Character {
 	 void defending(int);
 	 void printStats();
  private:
-	 bool hasShield = false;
-	 int shield = 0;			// indicates whether or not a shield
 };
 
 // derived class for the pokemon, Bieber, class

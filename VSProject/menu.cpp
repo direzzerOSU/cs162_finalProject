@@ -66,8 +66,16 @@ void yesOrNo(int& x) {
 void instructions(bool& status) {
 	// instructions
 	cout << "Welcome to the Monster Hunting Game!" << endl << endl;
+
 	cout << "Objective: Defeat the Queen Kitty Monster (Final Boss)" << endl;
 	cout << "	   Fight wild monsters to collect items" << endl;
+	cout << "           Find the Magic Lamp to reach Queen Kitty" << endl;
+
+	cout << endl << "But beware not to take too long to find the Queen Kitty..." << endl;
+	cout << "Queen Kitty cast a shroud of darkness over the Earth that poisons the air..." << endl;
+	cout << "If you breathe in too much toxic air, you'll die before you can attack Queen Kitty with your monsters..." << endl;
+	
+	cout << endl << "Good luck, hero!" << endl;
 
 	// prompt to begin the game
 	cout << endl << "Are you ready to begin the game?" << endl;
@@ -228,6 +236,7 @@ void movePlayer(Board* b, Character* c) {
 				// if monster is defeated, remove monster from the board
 				if (!static_cast<Trainer*>(c)->emptyLineup() && runFromFight == false) {
 					delete m;
+					static_cast<Trainer*>(c)->drainHealth();
 					b->moveUp(c);
 				}
 				// if player is defeated
@@ -248,6 +257,7 @@ void movePlayer(Board* b, Character* c) {
 			}
 		}
 		else {
+			static_cast<Trainer*>(c)->drainHealth();
 			b->moveUp(c);
 		}
 	}
@@ -272,6 +282,7 @@ void movePlayer(Board* b, Character* c) {
 				// if monster is defeated, remove monster from the board
 				if (!static_cast<Trainer*>(c)->emptyLineup() && runFromFight == false) {
 					delete m;
+					static_cast<Trainer*>(c)->drainHealth();
 					b->moveRight(c);
 				}
 				// if player is defeated
@@ -291,6 +302,7 @@ void movePlayer(Board* b, Character* c) {
 			}
 		}
 		else {
+			static_cast<Trainer*>(c)->drainHealth();
 			b->moveRight(c);
 		}
 	}
@@ -315,6 +327,7 @@ void movePlayer(Board* b, Character* c) {
 				// if monster is defeated, remove monster from the board
 				if (!static_cast<Trainer*>(c)->emptyLineup() && runFromFight == false) {
 					delete m;
+					static_cast<Trainer*>(c)->drainHealth();
 					b->moveDown(c);
 				}
 				// if player is defeated
@@ -334,6 +347,7 @@ void movePlayer(Board* b, Character* c) {
 			}
 		}
 		else {
+			static_cast<Trainer*>(c)->drainHealth();
 			b->moveDown(c);
 		}
 	}
@@ -358,6 +372,7 @@ void movePlayer(Board* b, Character* c) {
 				// if monster is defeated, remove monster from the board
 				if (!static_cast<Trainer*>(c)->emptyLineup() && runFromFight == false) {
 					delete m;
+					static_cast<Trainer*>(c)->drainHealth();
 					b->moveLeft(c);
 				}
 				// if player is defeated
@@ -377,6 +392,7 @@ void movePlayer(Board* b, Character* c) {
 			}
 		}
 		else {
+			static_cast<Trainer*>(c)->drainHealth();
 			b->moveLeft(c);
 		}
 	}
@@ -386,7 +402,10 @@ void movePlayer(Board* b, Character* c) {
 	}
 
 	// 50% chance to find an item
-	static_cast<Trainer*>(c)->randomItem();
+	if (c->getHealth() > 0)
+	{
+		static_cast<Trainer*>(c)->randomItem();
+	}
 }
 
 // player menu that appears at the start of each turn
@@ -426,7 +445,14 @@ void turnMenu(Board* b, Character* c) {
 
 	// view backpack items
 	else if (x == 3) {
-		static_cast<Trainer*>(c)->useItemPrompt();
+		if (static_cast<Trainer*>(c)->emptyBackpack()) 
+		{
+			cout << "Backpack is empty..." << endl;
+		}
+		else
+		{
+			static_cast<Trainer*>(c)->useItemPrompt();
+		}
 	}
 
 	// quit the current game
@@ -456,7 +482,7 @@ void monsterMenu(Character* player) {
 		cout << "		Armor:  " << static_cast<Trainer*>(player)->getMonster(k)->getArmor() << endl;
 	}
 	cout << endl << "Please select a monster from your lineup..." << endl;
-	cout << "Or please select 9 if you'd like to return to the main menu..." << endl;
+	cout << "Or please select 0 if you'd like to return to the main menu..." << endl;
 
 	// acquire user input (select the monster)
 	int monster = -10;
@@ -464,7 +490,7 @@ void monsterMenu(Character* player) {
 	cin >> monster;
 	intValidation(monster);
 
-	if (monster != 9)
+	if (monster != 0)
 	{
 		// verify the input is legal
 		validMonsterSelection(player, monster);

@@ -17,24 +17,32 @@ Queue::Queue(Character* value) {
 Queue::~Queue() {
 
 	// queue (circular linked list) contains 1 node (header)
-	if (head->next == nullptr && head->prev == nullptr) {
-		if (head != nullptr) {
+	if (head != nullptr) {
+		if (head->next == nullptr && head->prev == nullptr) {
 			delete head;
 		}
-	}
 
-	// queue (circular linked list) contains >1 node
-	else {
 		// verify there is at least one node in the queue (circular linked list)
-		if (head != nullptr) {
+		else {
 			QueueNode* node = head;
 			QueueNode* nodeDelete = node;
 
 			// 'step' one node at a time through the queue (circular linked list) & free memory
-			while (node->next != nullptr && node->prev != nullptr && node->next != head && node->prev != head) {
-				node = node->next;
-				delete nodeDelete;
-				nodeDelete = node;
+			while (node->next != nullptr) 
+			{
+				// verify the next 'step' is valid
+				if (node->next != nullptr)
+				{
+					node = node->next;
+
+					// free the node's character
+					if (nodeDelete->val != nullptr)
+					{
+						delete nodeDelete;
+					}
+
+					nodeDelete = node;
+				}
 			}
 			delete node;
 		}
@@ -238,24 +246,33 @@ itemQueue::itemQueue() {
 itemQueue::~itemQueue() {
 
 	// queue (circular linked list) contains 1 node (header)
-	if (head->next == nullptr && head->prev == nullptr) {
-		if (head != nullptr) {
+	if (head != nullptr) {
+		if (head->next == nullptr && head->prev == nullptr) {
 			delete head;
 		}
-	}
 
-	// queue (circular linked list) contains >1 node
-	else {
 		// verify there is at least one node in the queue (circular linked list)
-		if (head != nullptr) {
+		else {
 			itemNode* node = head;
 			itemNode* nodeDelete = node;
 
 			// 'step' one node at a time through the queue (circular linked list) & free memory
-			while (node->next != nullptr && node->prev != nullptr && node->next != head && node->prev != head) {
-				node = node->next;
-				delete nodeDelete;
-				nodeDelete = node;
+			while (node->next != nullptr)
+			{
+				// verify the next 'step' is valid
+				if (node->next != nullptr)
+				{
+					node = node->next;
+
+					// free the node's item
+					if (nodeDelete->val != nullptr)
+					{
+						delete nodeDelete;
+					}
+
+					delete nodeDelete;
+					nodeDelete = node;
+				}
 			}
 			delete node;
 		}
@@ -460,12 +477,14 @@ void itemQueue::print()
 
 		cout << "Backpack: " << endl;
 		cout << "     " << node->val->description << endl;
+		int counter = 1;
 
 		// loop through each monster in the player's lineup
 		while (node->next != head && node->next != nullptr) {
 			if (node->next != head && node->next != nullptr) {
 				node = node->next;
-				cout << "     " << node->val->description << endl;
+				cout << "     " << counter << ". " << node->val->description << endl;
+				counter++;
 			}
 		}
 	}
