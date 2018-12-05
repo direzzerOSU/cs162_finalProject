@@ -1,9 +1,9 @@
 /*********************************************************************
-** Program name: Circular Linked List
+** Program name: Monster Hunting Game
 ** Author: Ryan DiRezze
-** Date: November 11, 2018
+** Date: December 4, 2018
 ** Description: Defines classes and structs to implement the Circular
-   Linked List program.
+   Linked List (for monster and item objects).
 *********************************************************************/
 
 #include "circularLinkedList.hpp"
@@ -217,13 +217,16 @@ void Queue::print()
 		QueueNode* node = head;
 
 		cout << "Lineup: " << endl;
-		cout << "     " << node->val->getType() << endl;
+		cout << "     1. " << node->val->getType() << endl;
+
+		int counter = 2;
 
 		// loop through each monster in the player's lineup
 		while (node->next != head && node->next != nullptr) {
 			if (node->next != head && node->next != nullptr) {
 				node = node->next;
-				cout << "     " << node->val->getType() << endl;
+				cout << "     " << counter << ". " << node->val->getType() << endl;
+				counter++;
 			}
 		}
 	}
@@ -393,6 +396,61 @@ void itemQueue::removeFront() {
 	}
 }
 
+// removes a specific item from the player's backpack
+void itemQueue::removeItem(Item* x)
+{
+	// empty backpack
+	if (head == nullptr)
+	{
+		cout << "The backpack is empty..." << endl;
+	}
+		
+	else
+	{
+		// backpack is empty
+		if (head->val == nullptr)
+		{
+			cout << "The backpack is empty..." << endl;
+		}
+
+		// backpack has one item
+		else if (head->next == nullptr && head->prev == nullptr && head->val != nullptr)
+		{
+			if (x == head->val)
+			{
+				delete x;
+			}
+		}
+
+		// backpack has more than one item
+		else
+		{
+			itemNode* node = head;
+
+			// if the item is 'head', update 'head'
+			if (x == head->val)
+			{
+				head = head->next;
+			}
+
+			// loop through the items until the item is found
+			while (x != node->val)
+			{
+				node = node->next;
+
+				// the item is found (equal to the selected item)
+				if (x == node->val)
+				{
+					node->next->prev = node->prev;
+					node->prev->next = node->next;
+					delete x;	// free item's memory (after use)
+					delete node;
+				}
+			}
+		}
+	}
+}
+
 // returns a specific item from the player's backpack
 Item* itemQueue::getItem(int position) {
 	int counter = 0;
@@ -462,8 +520,6 @@ int itemQueue::size()
 // print items in the player's backpack
 void itemQueue::print()
 {
-	cout << "Printing..." << endl;
-
 	// lineup is empty
 	if (head == nullptr || head->val == nullptr) {
 		cout << "Backpack is empty..." << endl;
@@ -471,13 +527,13 @@ void itemQueue::print()
 
 	// lineup is NOT empty
 	else {
-		cout << "Backpack is not empty..." << endl;
+		//cout << "Backpack is not empty..." << endl;
 
 		itemNode* node = head;
 
 		cout << "Backpack: " << endl;
-		cout << "     " << node->val->description << endl;
-		int counter = 1;
+		cout << "     1. " << node->val->description << endl;
+		int counter = 2;
 
 		// loop through each monster in the player's lineup
 		while (node->next != head && node->next != nullptr) {

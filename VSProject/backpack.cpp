@@ -1,9 +1,8 @@
 /*********************************************************************
-** Program name: Circular Linked List
+** Program name: Monster Hunting Game
 ** Author: Ryan DiRezze
-** Date: November 11, 2018
-** Description: Defines classes and structs to implement the Circular
-   Linked List program.
+** Date: December 4, 2018
+** Description: Implements the backpack object member functions.
 *********************************************************************/
 
 #include "backpack.hpp"
@@ -65,7 +64,7 @@ void Backpack::removeFront()
 // returns a specific item from the player's backpack
 Item* Backpack::getItem(int position)
 {
-	items->getItem(position);
+	return items->getItem(position);
 }
 
 // returns the size of the player's backpack (queue/list)
@@ -175,6 +174,15 @@ void Backpack::itemDrop()
 		//	cout << endl << "You have found a " << x->description << "!" << endl;
 		//	addBack(x);
 		//}
+	}
+}
+
+// removes an item from the backpack of items
+void Backpack::removeItem(int n, Item* item)
+{
+	if (getItem(n) == item)
+	{
+		items->removeItem(item);
 	}
 }
 

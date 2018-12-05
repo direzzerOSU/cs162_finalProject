@@ -1,9 +1,9 @@
 /*********************************************************************
-** Program name: Circular Linked List
+** Program name: Monster Hunting Game
 ** Author: Ryan DiRezze
-** Date: November 11, 2018
-** Description: Defines classes and structs to implement the Circular
-   Linked List program.
+** Date: December 4, 2018
+** Description: Defines classes and structs to implement the game
+   board.
 *********************************************************************/
 
 #include "board.hpp"

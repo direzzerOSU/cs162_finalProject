@@ -1,8 +1,8 @@
 /*********************************************************************
-** Program name: Fantasy Combat Game 
+** Program name: Monster Hunting Game
 ** Author: Ryan DiRezze
-** Date: November 4, 2018
-** Description: 
+** Date: December 4, 2018
+** Description: Defines the input validation functions.
 *********************************************************************/
 
 // begin the include guard

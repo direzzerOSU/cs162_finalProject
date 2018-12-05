@@ -1,9 +1,9 @@
 /*********************************************************************
-** Program name: Circular Linked List
+** Program name: Monster Hunting Game
 ** Author: Ryan DiRezze
-** Date: November 11, 2018
-** Description: Defines classes and structs to implement the Circular
-   Linked List program.
+** Date: December 4, 2018
+** Description: Defines classes and structs to implement the game's
+   characters / monsters.
 *********************************************************************/
 
 #include "character.hpp"
@@ -271,8 +271,37 @@ void Trainer::viewLineup()
 }
 
 // checks to see if the player's lineup is empty
-bool Trainer::emptyLineup() {
-	return lineup->isEmpty();
+bool Trainer::emptyLineup() 
+{
+	if (lineup->isEmpty())
+	{
+		return true;
+	}
+
+	else
+	{
+		bool empty = false;
+		int count = 0;
+
+		// check if all monsters are dead
+		for (int k = 0; k < lineup->size(); k++)
+		{
+			// check if each monster is dead
+			if (lineup->getCharacter(k)->getHealth() <= 0)
+			{
+				// count the number of dead monsters
+				count++;
+			}
+		}
+
+		// if all monsters are dead, the lineup is empty
+		if (count == lineup->size())
+		{
+			empty = true;
+		}
+
+		return empty;
+	}
 }
 
 // initializes & creates a backpack for the player's items
@@ -306,7 +335,7 @@ void Trainer::useItemPrompt()
 
 	// user chooses an item to use
 	cout << endl << "What item would you like to use? (Input the item's corresponding number)" << endl;
-	cout << "Please input 0 if you would like to return to the game menu..." << endl;
+	cout << "Please input 0 if you would like to return to the game menu..." << endl << endl;
 	int selection = -10;
 	cout << "Selection: ";
 	cin >> selection;
@@ -330,13 +359,13 @@ void Trainer::useItemPrompt()
 	else if (backpack->getItem(selection - 1)->description != "Magic Lamp") 
 	{
 		// print player's lineup
-		cout << "What monster (in your lineup) would you like to use the item on?" << endl << endl;
+		cout << endl << "What monster (in your lineup) would you like to use the item on?" << endl << endl;
 		lineup->print();
 
 		// use item & update the player's monster's stats
 		int monster = -10;
 		cout << "Please choose the monster that you'd like to use your item on..." << endl;
-		cout << "Selection: ";
+		cout << endl << "Selection: ";
 		cin >> monster;
 		intValidation(monster);
 
@@ -350,7 +379,9 @@ void Trainer::useItemPrompt()
 		}
 
 		// use an item
-		backpack->useItem(lineup->getCharacter(monster), backpack->getItem(selection));
+		Item* x = backpack->getItem(selection - 1);
+		backpack->useItem(lineup->getCharacter(monster), x);
+		backpack->removeItem((selection - 1), x);
 	}
 
 	// magic lamp is chosen

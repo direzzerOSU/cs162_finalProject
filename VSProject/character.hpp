@@ -1,9 +1,9 @@
 /*********************************************************************
-** Program name: Circular Linked List
+** Program name: Monster Hunting Game
 ** Author: Ryan DiRezze
-** Date: November 11, 2018
-** Description: Defines classes and structs to implement the Circular
-   Linked List program.
+** Date: December 4, 2018
+** Description: Defines classes and structs to implement the game's
+   characters / monsters.
 *********************************************************************/
 
 #ifndef CHARACTER_H
@@ -103,7 +103,7 @@ class Trainer : public Character {
 	 void addItem(Item*);
 	 void randomItem();
  private:
-	 int numMonsters = 3;
+	 int numMonsters = 5;
 	 Queue* lineup = nullptr;	// list of pokemon that the trainer has
 	 Backpack* backpack = nullptr;
 	 bool gameStatus = true;	// true = active; false = game over / ends

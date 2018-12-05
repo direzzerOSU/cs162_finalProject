@@ -1,7 +1,7 @@
 /*********************************************************************
-** Program name: Circular Linked List 
+** Program name: Monster Hunting Game
 ** Author: Ryan DiRezze
-** Date: November 11, 2018
+** Date: December 4, 2018
 ** Description: Implements the main menu and other menu-like
    functions.
 *********************************************************************/
