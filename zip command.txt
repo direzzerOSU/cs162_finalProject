@@ -1,3 +1,3 @@
 zip –D Lab1_LastName_FirstName.zip file1.cpp file2.cpp file1.hpp file2.hpp main.cpp makefile
 
-finalProject-Design.pdf FinalProject-Reflection.pdf backpack.cpp backpack.hpp board.cpp board.hpp character.cpp character.hpp circularLinkedList.cpp circularLinkedList.hpp inputValidation.cpp inputValidation.hpp main.cpp makefile menu.cpp menu.hpp
+zip -D FinalProject_DiRezze_Ryan.zip finalProject-Design.pdf FinalProject-Reflection.pdf backpack.cpp backpack.hpp board.cpp board.hpp character.cpp character.hpp circularLinkedList.cpp circularLinkedList.hpp inputValidation.cpp inputValidation.hpp main.cpp makefile menu.cpp menu.hpp
